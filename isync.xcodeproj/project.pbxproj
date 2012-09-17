@@ -21,6 +21,12 @@
 		3CB8B6CE160229FB0067189A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CB8B6AC160229F90067189A /* Foundation.framework */; };
 		3CB8B6D6160229FB0067189A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3CB8B6D4160229FB0067189A /* InfoPlist.strings */; };
 		3CB8B6D9160229FB0067189A /* isyncTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CB8B6D8160229FB0067189A /* isyncTests.m */; };
+		8493C28E160764DE000A14A9 /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 8493C28D160764DE000A14A9 /* GDataXMLNode.m */; };
+		8493C28F160764DE000A14A9 /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 8493C28D160764DE000A14A9 /* GDataXMLNode.m */; };
+		8493C29216076673000A14A9 /* GmailContacts.xml in Resources */ = {isa = PBXBuildFile; fileRef = 8493C29116076673000A14A9 /* GmailContacts.xml */; };
+		8493C29316076673000A14A9 /* GmailContacts.xml in Resources */ = {isa = PBXBuildFile; fileRef = 8493C29116076673000A14A9 /* GmailContacts.xml */; };
+		8493C2961607676A000A14A9 /* GmailContactsParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 8493C2951607676A000A14A9 /* GmailContactsParser.m */; };
+		8493C2971607676A000A14A9 /* GmailContactsParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 8493C2951607676A000A14A9 /* GmailContactsParser.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +60,11 @@
 		3CB8B6D5160229FB0067189A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3CB8B6D7160229FB0067189A /* isyncTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = isyncTests.h; sourceTree = "<group>"; };
 		3CB8B6D8160229FB0067189A /* isyncTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = isyncTests.m; sourceTree = "<group>"; };
+		8493C28C160764DE000A14A9 /* GDataXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDataXMLNode.h; sourceTree = "<group>"; };
+		8493C28D160764DE000A14A9 /* GDataXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDataXMLNode.m; sourceTree = "<group>"; };
+		8493C29116076673000A14A9 /* GmailContacts.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = GmailContacts.xml; sourceTree = "<group>"; };
+		8493C2941607676A000A14A9 /* GmailContactsParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GmailContactsParser.h; sourceTree = "<group>"; };
+		8493C2951607676A000A14A9 /* GmailContactsParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GmailContactsParser.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +130,8 @@
 				3CB8B6BF160229FA0067189A /* MainStoryboard_iPad.storyboard */,
 				3CB8B6C2160229FA0067189A /* ViewController.h */,
 				3CB8B6C3160229FA0067189A /* ViewController.m */,
+				8493C2941607676A000A14A9 /* GmailContactsParser.h */,
+				8493C2951607676A000A14A9 /* GmailContactsParser.m */,
 				3CB8B6B1160229FA0067189A /* Supporting Files */,
 			);
 			path = isync;
@@ -128,7 +141,10 @@
 			isa = PBXGroup;
 			children = (
 				3CB8B6B2160229FA0067189A /* isync-Info.plist */,
+				8493C29116076673000A14A9 /* GmailContacts.xml */,
 				3CB8B6B3160229FA0067189A /* InfoPlist.strings */,
+				8493C28C160764DE000A14A9 /* GDataXMLNode.h */,
+				8493C28D160764DE000A14A9 /* GDataXMLNode.m */,
 				3CB8B6B6160229FA0067189A /* main.m */,
 				3CB8B6B8160229FA0067189A /* isync-Prefix.pch */,
 			);
@@ -228,6 +244,7 @@
 				3CB8B6B5160229FA0067189A /* InfoPlist.strings in Resources */,
 				3CB8B6BE160229FA0067189A /* MainStoryboard_iPhone.storyboard in Resources */,
 				3CB8B6C1160229FA0067189A /* MainStoryboard_iPad.storyboard in Resources */,
+				8493C29216076673000A14A9 /* GmailContacts.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -236,6 +253,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3CB8B6D6160229FB0067189A /* InfoPlist.strings in Resources */,
+				8493C29316076673000A14A9 /* GmailContacts.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -265,6 +283,8 @@
 				3CB8B6B7160229FA0067189A /* main.m in Sources */,
 				3CB8B6BB160229FA0067189A /* AppDelegate.m in Sources */,
 				3CB8B6C4160229FA0067189A /* ViewController.m in Sources */,
+				8493C28E160764DE000A14A9 /* GDataXMLNode.m in Sources */,
+				8493C2961607676A000A14A9 /* GmailContactsParser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -273,6 +293,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				3CB8B6D9160229FB0067189A /* isyncTests.m in Sources */,
+				8493C28F160764DE000A14A9 /* GDataXMLNode.m in Sources */,
+				8493C2971607676A000A14A9 /* GmailContactsParser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -328,7 +350,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
@@ -356,7 +378,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
@@ -378,7 +400,9 @@
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "isync/isync-Prefix.pch";
+				HEADER_SEARCH_PATHS = /usr/include/libxml2;
 				INFOPLIST_FILE = "isync/isync-Info.plist";
+				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -389,7 +413,9 @@
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "isync/isync-Prefix.pch";
+				HEADER_SEARCH_PATHS = /usr/include/libxml2;
 				INFOPLIST_FILE = "isync/isync-Info.plist";
+				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -448,6 +474,7 @@
 				3CB8B6DE160229FB0067189A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3CB8B6DF160229FB0067189A /* Build configuration list for PBXNativeTarget "isyncTests" */ = {
 			isa = XCConfigurationList;
@@ -456,6 +483,7 @@
 				3CB8B6E1160229FB0067189A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

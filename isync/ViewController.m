@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "GmailContactsParser.h"
 
 @interface ViewController ()
 
@@ -17,12 +18,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+        
 	// Do any additional setup after loading the view, typically from a nib.
 }
 
 - (void)viewDidUnload
 {
     [super viewDidUnload];
+
     // Release any retained subviews of the main view.
 }
 
@@ -33,6 +36,12 @@
     } else {
         return YES;
     }
+}
+-(IBAction)synchronizeButtonPressed:(id)sender{
+ 
+    [GmailContactsParser parseGmailContacts];
+    
+    
 }
 
 @end
