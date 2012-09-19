@@ -21,8 +21,7 @@
 -(void)fetchAuthTokenWithGmailId:(NSString *)GmailID GmailPassword:(NSString *)GmailPassword AppleID:(NSString *)AppleID ApplePassword:(NSString *)ApplePassword{
     
     self.responseData = [NSMutableData data];
-    
-    NSString *post = @"Email=shobana.random@gmail.com&Passwd=password1990&accountType=GOOGLE&service=cp";
+    NSString *post = [NSString stringWithFormat:@"Email=%@&Passwd=%@&accountType=GOOGLE&service=cp",GmailID, GmailPassword];
     NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
     
     NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
@@ -54,15 +53,17 @@
     NSLog(@"Success..Received %d bytes",[self.responseData length]);
     NSString *results = [[NSString alloc] initWithData:self.responseData encoding:NSUTF8StringEncoding];
 
-    NSUInteger fromIndex = [results rangeOfString:@"Auth="].location;
-    self.AuthToken = [results substringFromIndex:fromIndex + 5];
+    NSRange range=[results rangeOfString:@"Auth="];
+    if (range.length>0) {
+        NSUInteger fromIndex = range.location;
+        self.AuthToken = [results substringFromIndex:fromIndex + range.length];
     
-    NSUInteger toIndex = [self.AuthToken rangeOfString:@"\n"].location;
-    self.AuthToken = [self.AuthToken substringToIndex:toIndex];
+        NSUInteger toIndex = [self.AuthToken rangeOfString:@"\n"].location;
+        self.AuthToken = [self.AuthToken substringToIndex:toIndex];
 
-    GmailContactsFetcher *gmailContactsFetcher=[[GmailContactsFetcher alloc]init];
-    [gmailContactsFetcher fetchGmailContactswithAuthToken:self.AuthToken];
-    
+        GmailContactsFetcher *gmailContactsFetcher=[[GmailContactsFetcher alloc]init];
+        [gmailContactsFetcher fetchGmailContactswithAuthToken:self.AuthToken];
+    }
 }
 
 

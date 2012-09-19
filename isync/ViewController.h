@@ -20,6 +20,7 @@
 @property (nonatomic,retain)IBOutlet UITextField *GmailPassword;
 
 
+-(IBAction)hideKeyBoard:(id)sender;
 -(IBAction)synchronizeButtonPressed:(id)sender;
 
 @end

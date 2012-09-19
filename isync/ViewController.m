@@ -16,7 +16,7 @@
 @end
 
 @implementation ViewController
-
+@synthesize GmailID,GmailPassword,AppleID,ApplePassword;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -39,6 +39,14 @@
         return YES;
     }
 }
+
+-(IBAction)hideKeyBoard:(id)sender{
+    [GmailID resignFirstResponder];
+    [GmailPassword resignFirstResponder];
+    [AppleID resignFirstResponder];
+    [ApplePassword resignFirstResponder];
+}
+
 -(IBAction)synchronizeButtonPressed:(id)sender{
     NSString *gmailIDRetrieved=GmailID.text;
     NSString *gmailPasswordRetrieved=GmailPassword.text;
@@ -47,9 +55,6 @@
     AuthTokenFetcher *authTokenFetcher=[[AuthTokenFetcher alloc]init];
     [authTokenFetcher fetchAuthTokenWithGmailId:gmailIDRetrieved GmailPassword:gmailPasswordRetrieved AppleID:appleIDRetrieved ApplePassword:applePasswordRetrieved];
     //[GmailContactsParser parseGmailContacts];
- 
-    
-    
 }
 
 @end
