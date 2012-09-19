@@ -8,6 +8,8 @@
 
 #import "ViewController.h"
 #import "GmailContactsParser.h"
+#import "AuthTokenFetcher.h"
+#import "GmailContactsFetcher.h"
 
 @interface ViewController ()
 
@@ -38,8 +40,14 @@
     }
 }
 -(IBAction)synchronizeButtonPressed:(id)sender{
+    NSString *gmailIDRetrieved=GmailID.text;
+    NSString *gmailPasswordRetrieved=GmailPassword.text;
+    NSString *appleIDRetrieved=AppleID.text;
+    NSString *applePasswordRetrieved=ApplePassword.text;
+    AuthTokenFetcher *authTokenFetcher=[[AuthTokenFetcher alloc]init];
+    [authTokenFetcher fetchAuthTokenWithGmailId:gmailIDRetrieved GmailPassword:gmailPasswordRetrieved AppleID:appleIDRetrieved ApplePassword:applePasswordRetrieved];
+    //[GmailContactsParser parseGmailContacts];
  
-    [GmailContactsParser parseGmailContacts];
     
     
 }
