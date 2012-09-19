@@ -30,6 +30,9 @@
 		8493C29316076673000A14A9 /* GmailContacts.xml in Resources */ = {isa = PBXBuildFile; fileRef = 8493C29116076673000A14A9 /* GmailContacts.xml */; };
 		8493C2961607676A000A14A9 /* GmailContactsParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 8493C2951607676A000A14A9 /* GmailContactsParser.m */; };
 		8493C2971607676A000A14A9 /* GmailContactsParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 8493C2951607676A000A14A9 /* GmailContactsParser.m */; };
+		84F24B911609DADA00204744 /* ABAddressBookInf.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F24B901609DADA00204744 /* ABAddressBookInf.m */; };
+		84F24B951609F88800204744 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84F24B931609F88800204744 /* AddressBook.framework */; };
+		84F24B961609F88800204744 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84F24B941609F88800204744 /* AddressBookUI.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +76,10 @@
 		8493C29116076673000A14A9 /* GmailContacts.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = GmailContacts.xml; sourceTree = "<group>"; };
 		8493C2941607676A000A14A9 /* GmailContactsParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GmailContactsParser.h; sourceTree = "<group>"; };
 		8493C2951607676A000A14A9 /* GmailContactsParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GmailContactsParser.m; sourceTree = "<group>"; };
+		84F24B8F1609DADA00204744 /* ABAddressBookInf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABAddressBookInf.h; sourceTree = "<group>"; };
+		84F24B901609DADA00204744 /* ABAddressBookInf.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABAddressBookInf.m; sourceTree = "<group>"; };
+		84F24B931609F88800204744 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		84F24B941609F88800204744 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +87,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84F24B951609F88800204744 /* AddressBook.framework in Frameworks */,
+				84F24B961609F88800204744 /* AddressBookUI.framework in Frameworks */,
 				3CB8B6AB160229F90067189A /* UIKit.framework in Frameworks */,
 				3CB8B6AD160229F90067189A /* Foundation.framework in Frameworks */,
 				3CB8B6AF160229FA0067189A /* CoreGraphics.framework in Frameworks */,
@@ -103,6 +112,8 @@
 			isa = PBXGroup;
 			children = (
 				84B22A8F1609F82B00B262E5 /* Spike */,
+				84F24B931609F88800204744 /* AddressBook.framework */,
+				84F24B941609F88800204744 /* AddressBookUI.framework */,
 				3CB8B6B0160229FA0067189A /* isync */,
 				3CB8B6D1160229FB0067189A /* isyncTests */,
 				3CB8B6A9160229F90067189A /* Frameworks */,
@@ -145,6 +156,8 @@
 				8492A8FC1607980200354F07 /* AuthTokenFetcher.m */,
 				8492A9021607B35E00354F07 /* GmailContactsFetcher.h */,
 				8492A9031607B35E00354F07 /* GmailContactsFetcher.m */,
+				84F24B8F1609DADA00204744 /* ABAddressBookInf.h */,
+				84F24B901609DADA00204744 /* ABAddressBookInf.m */,
 				3CB8B6B1160229FA0067189A /* Supporting Files */,
 			);
 			path = isync;
@@ -310,6 +323,7 @@
 				8493C2961607676A000A14A9 /* GmailContactsParser.m in Sources */,
 				8492A8FD1607980200354F07 /* AuthTokenFetcher.m in Sources */,
 				8492A9041607B35E00354F07 /* GmailContactsFetcher.m in Sources */,
+				84F24B911609DADA00204744 /* ABAddressBookInf.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
