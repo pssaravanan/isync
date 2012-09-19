@@ -21,6 +21,7 @@
 		3CB8B6CE160229FB0067189A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CB8B6AC160229F90067189A /* Foundation.framework */; };
 		3CB8B6D6160229FB0067189A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3CB8B6D4160229FB0067189A /* InfoPlist.strings */; };
 		3CB8B6D9160229FB0067189A /* isyncTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CB8B6D8160229FB0067189A /* isyncTests.m */; };
+		84114DEE1609F8FA00E360F5 /* AddressBookRetrive in Resources */ = {isa = PBXBuildFile; fileRef = 84114DED1609F8FA00E360F5 /* AddressBookRetrive */; };
 		8492A8FD1607980200354F07 /* AuthTokenFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 8492A8FC1607980200354F07 /* AuthTokenFetcher.m */; };
 		8492A9041607B35E00354F07 /* GmailContactsFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 8492A9031607B35E00354F07 /* GmailContactsFetcher.m */; };
 		8493C28E160764DE000A14A9 /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 8493C28D160764DE000A14A9 /* GDataXMLNode.m */; };
@@ -62,6 +63,7 @@
 		3CB8B6D5160229FB0067189A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3CB8B6D7160229FB0067189A /* isyncTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = isyncTests.h; sourceTree = "<group>"; };
 		3CB8B6D8160229FB0067189A /* isyncTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = isyncTests.m; sourceTree = "<group>"; };
+		84114DED1609F8FA00E360F5 /* AddressBookRetrive */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AddressBookRetrive; sourceTree = "<group>"; };
 		8492A8FB1607980200354F07 /* AuthTokenFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthTokenFetcher.h; sourceTree = "<group>"; };
 		8492A8FC1607980200354F07 /* AuthTokenFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthTokenFetcher.m; sourceTree = "<group>"; };
 		8492A9021607B35E00354F07 /* GmailContactsFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GmailContactsFetcher.h; sourceTree = "<group>"; };
@@ -100,6 +102,7 @@
 		3CB8B69B160229F90067189A = {
 			isa = PBXGroup;
 			children = (
+				84B22A8F1609F82B00B262E5 /* Spike */,
 				3CB8B6B0160229FA0067189A /* isync */,
 				3CB8B6D1160229FB0067189A /* isyncTests */,
 				3CB8B6A9160229F90067189A /* Frameworks */,
@@ -180,6 +183,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		84B22A8F1609F82B00B262E5 /* Spike */ = {
+			isa = PBXGroup;
+			children = (
+				84114DED1609F8FA00E360F5 /* AddressBookRetrive */,
+			);
+			name = Spike;
+			path = isync;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -255,6 +267,7 @@
 				3CB8B6BE160229FA0067189A /* MainStoryboard_iPhone.storyboard in Resources */,
 				3CB8B6C1160229FA0067189A /* MainStoryboard_iPad.storyboard in Resources */,
 				8493C29216076673000A14A9 /* GmailContacts.xml in Resources */,
+				84114DEE1609F8FA00E360F5 /* AddressBookRetrive in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
