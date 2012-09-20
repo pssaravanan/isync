@@ -21,7 +21,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-        
+    GmailPassword.secureTextEntry=YES;
+    ApplePassword.secureTextEntry=YES;
 	// Do any additional setup after loading the view, typically from a nib.
 }
 
