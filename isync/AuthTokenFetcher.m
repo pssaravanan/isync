@@ -64,6 +64,16 @@
         GmailContactsFetcher *gmailContactsFetcher=[[GmailContactsFetcher alloc]init];
         [gmailContactsFetcher fetchGmailContactswithAuthToken:self.AuthToken];
     }
+    else
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@""
+                                                        message:@"Invalid Username\/Password!Try Again!!!"
+                                                       delegate:self
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+        [alert release];
+    }
 }
 
 
