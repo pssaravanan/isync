@@ -1,10 +1,3 @@
-//
-//  AddressBookViewController.m
-//  AB
-//
-//  Created by Nithya on 19/09/12.
-//  Copyright (c) 2012 ThoughtWorks. All rights reserved.
-//
 
 #import "AddressBookViewController.h"
 #import "AddressBookUI/AddressBookUI.h"
@@ -26,12 +19,25 @@ CFTypeRef MiddleNamePhonetic ;
 CFTypeRef Organization ;
 CFTypeRef JobTitle ;
 CFTypeRef Department ;
-CFTypeRef Email ;
-CFTypeRef Birthday ;
-CFTypeRef Note ;
+
 CFTypeRef CreationDate ;
 CFTypeRef ModificationDate ;
 
+//Phone Numbers
+ABMutableMultiValueRef PhoneNumbers;
+CFTypeRef PhoneMain ;
+CFTypeRef PhoneMobile ;
+CFTypeRef PhoneIPhone ;
+CFTypeRef PhoneHomeFax ;
+CFTypeRef PhoneWorkFax ;
+CFTypeRef PhoneOtherFax ;
+CFTypeRef PhonePager ;
+
+//Emails
+ABMutableMultiValueRef EMails;
+CFTypeRef WorkLabel;
+CFTypeRef HomeLabel;
+CFTypeRef OtherLabel;
 
 
 
@@ -57,6 +63,11 @@ CFTypeRef ModificationDate ;
 
 - (IBAction)click:(id)sender {
     
+    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Alert!!"
+                                                        message:@"View Contacts Info in Terminal!!" delegate:self
+                                              cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alertView show];
+    
     ABAddressBookRef addressBook = ABAddressBookCreate();
     CFArrayRef people = ABAddressBookCopyArrayOfAllPeople(addressBook);
     for (int i=0; i<CFArrayGetCount(people);i++)
@@ -75,32 +86,87 @@ CFTypeRef ModificationDate ;
         Organization = (ABRecordCopyValue(record, kABPersonOrganizationProperty));
         JobTitle = (ABRecordCopyValue(record, kABPersonJobTitleProperty));
         Department = (ABRecordCopyValue(record, kABPersonDepartmentProperty));
-        Email = (ABRecordCopyValue(record, kABPersonEmailProperty));
-        Birthday = (ABRecordCopyValue(record, kABPersonBirthdayProperty));
-        Note = (ABRecordCopyValue(record, kABPersonNoteProperty));
         CreationDate = (ABRecordCopyValue(record, kABPersonCreationDateProperty));
         ModificationDate = (ABRecordCopyValue(record, kABPersonModificationDateProperty));
         
-        
-        NSLog(@"%@\n", FirstName );
-        NSLog(@"%@\n", LastName );
-        NSLog(@"%@\n", MiddleName );
-        NSLog(@"%@\n", Prefix );
-        NSLog(@"%@\n", Suffix );
-        NSLog(@"%@\n", Nickname );
+        NSLog(@"FirstName\t%@\n", FirstName );
+        NSLog(@"LastName\t%@\n", LastName );
+        NSLog(@"MiddleName\t%@\n", MiddleName );
+        NSLog(@"Prefix\t%@\n", Prefix );
+        NSLog(@"Suffix\t%@\n", Suffix );
+        NSLog(@"Nickname\t%@\n", Nickname );
         NSLog(@"%@\n", FirstNamePhonetic );
         NSLog(@"%@\n", LastNamePhonetic );
         NSLog(@"%@\n", MiddleNamePhonetic );
         NSLog(@"%@\n", Organization );
         NSLog(@"%@\n", JobTitle );
         NSLog(@"%@\n", Department );
-        NSLog(@"%@\n", Email );
-        NSLog(@"%@\n", Birthday );
-        NSLog(@"%@\n", Note ); 
         NSLog(@"%@\n", CreationDate ); 
         NSLog(@"%@\n", ModificationDate );
         
-   }
+        
+        PhoneNumbers = ABRecordCopyValue(record,kABPersonPhoneProperty);
+        NSLog(@"Phone Numbers");
+        int phoneNumberCount = ABMultiValueGetCount(PhoneNumbers);
+        if (phoneNumberCount > 0) {
+            for (CFIndex i = 0; i < phoneNumberCount; i++) {
+                NSLog(@"\n%@\t%@",
+                      (__bridge NSString*) ABAddressBookCopyLocalizedLabel(
+                                                    ABMultiValueCopyLabelAtIndex(PhoneNumbers, i)),
+                      (__bridge_transfer NSString*) ABMultiValueCopyValueAtIndex(PhoneNumbers, i));
+            }
+        } else {
+            NSLog(@"\t [None]");
+        }
+        
+        
+        EMails = (ABRecordCopyValue(record, kABPersonEmailProperty));
+        NSLog(@"EMails");
+        int EMailCount = ABMultiValueGetCount(EMails);
+        if (EMailCount > 0) {
+            for (CFIndex i = 0; i < EMailCount; i++) {
+                NSLog(@"\n%@\t%@",
+                      (__bridge NSString*) ABAddressBookCopyLocalizedLabel(
+                                                                           ABMultiValueCopyLabelAtIndex(EMails, i)),
+                      (__bridge_transfer NSString*) ABMultiValueCopyValueAtIndex(EMails, i));
+            }
+        } else {
+            NSLog(@"\t [None]");
+        }
+        
+    }
+    
+}
+
+- (IBAction)clickCreate:(id)sender {
+    
+    FirstName = @"Nithya";
+    LastName = @"Natarajan";
+    MiddleName = @"";
+    Prefix = @"Prefix";
+    Suffix = @"Suffix";
+    Nickname =@"Natty";
+    FirstNamePhonetic = @"FP";
+    LastNamePhonetic = @"LP";
+    MiddleNamePhonetic = @"MP";
+    Organization = @"TW";
+    JobTitle = @"App Dev";
+    Department = @"Dev ops";
+    
+    //Phone Numbers
+    PhoneMain = @"15555555555";
+    PhoneMobile = @"11234567890";
+    PhoneIPhone = @"15555555555";
+    PhoneHomeFax = @"11234567890";
+    PhoneWorkFax = @"11234567890";
+    PhoneOtherFax = @"1123456890";
+    PhonePager = @"11234567890";
+    
+    
+    //EMails
+    WorkLabel = @"nithya@thoughtworks";
+    HomeLabel = @"nithya@gmail.com";
+    OtherLabel = @"nithya@evernote";
     
 }
 
@@ -120,12 +186,35 @@ CFTypeRef ModificationDate ;
     ABRecordSetValue(newRecord, kABPersonOrganizationProperty,Organization , &error);
     ABRecordSetValue(newRecord, kABPersonJobTitleProperty,JobTitle , &error);
     ABRecordSetValue(newRecord, kABPersonDepartmentProperty,Department , &error);
-    ABRecordSetValue(newRecord, kABPersonEmailProperty,Email , &error);
-    ABRecordSetValue(newRecord, kABPersonBirthdayProperty,Birthday , &error);
-    ABRecordSetValue(newRecord, kABPersonNoteProperty,Note , &error);
+
+    //Phone Numbers
+    ABMutableMultiValueRef multiPhone = ABMultiValueCreateMutable(kABMultiStringPropertyType);
+    ABMultiValueAddValueAndLabel(multiPhone, PhoneMain , kABPersonPhoneMainLabel, NULL);
+    ABMultiValueAddValueAndLabel(multiPhone, PhoneMobile , kABPersonPhoneMobileLabel, NULL);
+    ABMultiValueAddValueAndLabel(multiPhone, PhoneIPhone , kABPersonPhoneIPhoneLabel, NULL);
+    ABMultiValueAddValueAndLabel(multiPhone, PhoneHomeFax , kABPersonPhoneHomeFAXLabel, NULL);
+    ABMultiValueAddValueAndLabel(multiPhone, PhoneWorkFax , kABPersonPhoneWorkFAXLabel, NULL);
+    ABMultiValueAddValueAndLabel(multiPhone, PhoneOtherFax , kABPersonPhoneOtherFAXLabel, NULL);
+    ABMultiValueAddValueAndLabel(multiPhone, PhonePager , kABPersonPhonePagerLabel, NULL);
+    ABRecordSetValue(newRecord, kABPersonPhoneProperty, multiPhone, &error);
+     
+       
+    //Emails
+    ABMutableMultiValueRef multiEmail = ABMultiValueCreateMutable(kABMultiStringPropertyType);
+    ABMultiValueAddValueAndLabel(multiEmail, HomeLabel, kABHomeLabel, NULL);
+    ABMultiValueAddValueAndLabel(multiEmail, WorkLabel, kABWorkLabel, NULL);
+    ABMultiValueAddValueAndLabel(multiEmail, OtherLabel, kABOtherLabel, NULL);
+    ABRecordSetValue(newRecord, kABPersonEmailProperty, multiEmail, &error);
+    
+    
     ABRecordSetValue(newRecord, kABPersonCreationDateProperty,CreationDate , &error);
     ABRecordSetValue(newRecord, kABPersonModificationDateProperty,ModificationDate , &error);
     ABAddressBookAddRecord(addressBook, newRecord, &error);
     ABAddressBookSave(addressBook, &error);
+    
+    if(error != NULL){
+        NSLog(@"Save Failed");
+    }
+    
 }
 @end

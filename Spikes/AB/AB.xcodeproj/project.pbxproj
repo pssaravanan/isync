@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		84C88508160CFF460061A509 /* Spike in Resources */ = {isa = PBXBuildFile; fileRef = 84C88507160CFF460061A509 /* Spike */; };
 		84E53961160A55EB00F48F03 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84E53960160A55EB00F48F03 /* AddressBookUI.framework */; };
 		84E53964160A55EF00F48F03 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84E53963160A55EF00F48F03 /* AddressBook.framework */; };
 		84F24B6C1609D7D800204744 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84F24B6B1609D7D800204744 /* UIKit.framework */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		84C88507160CFF460061A509 /* Spike */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Spike; sourceTree = "<group>"; };
 		84E53960160A55EB00F48F03 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		84E53963160A55EF00F48F03 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		84F24B671609D7D800204744 /* AB.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AB.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -91,6 +93,7 @@
 				84F24B831609D7D800204744 /* AddressBookViewController.h */,
 				84F24B841609D7D800204744 /* AddressBookViewController.m */,
 				84F24B721609D7D800204744 /* Supporting Files */,
+				84C88507160CFF460061A509 /* Spike */,
 			);
 			path = AB;
 			sourceTree = "<group>";
@@ -160,6 +163,7 @@
 			files = (
 				84F24B761609D7D800204744 /* InfoPlist.strings in Resources */,
 				84F24B7F1609D7D800204744 /* MainStoryboard_iPhone.storyboard in Resources */,
+				84C88508160CFF460061A509 /* Spike in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
