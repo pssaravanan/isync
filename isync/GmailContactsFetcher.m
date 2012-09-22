@@ -7,6 +7,8 @@
 //
 
 #import "GmailContactsFetcher.h"
+#import "ABAddressBookInf.h"
+
 @interface GmailContactsFetcher ()
 
 @property(nonatomic, strong) NSMutableData *responseData;
@@ -51,6 +53,7 @@
     NSLog(@"Success..Received %d bytes",[self.responseData length]);
     NSString *results = [[NSString alloc] initWithData:self.responseData encoding:NSUTF8StringEncoding];
     NSLog(results);
+    [ABAddressBookInf constructAddressBookListAfterParsing:self.responseData];
    
 }
 
