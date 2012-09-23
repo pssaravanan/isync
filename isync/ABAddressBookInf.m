@@ -53,18 +53,20 @@
         ABMultiValueAddValueAndLabel(multiEmail, emailAddress, kABHomeLabel, NULL);
         ABRecordSetValue(newRecord, kABPersonEmailProperty, multiEmail, &error);
         
-//        //Phone
+        //Phone
 //        ABMutableMultiValueRef multiPhone = ABMultiValueCreateMutable(kABMultiStringPropertyType);
-//        ABMultiValueAddValueAndLabel(multiPhone,( CFTypeRef *)phone, kABPersonPhoneMainLabel, NULL);
+//        ABMultiValueAddValueAndLabel(multiPhone,phone, kABPersonPhoneMainLabel, NULL);
 //        ABRecordSetValue(newRecord, kABPersonPhoneProperty, multiPhone, &error);
-        
+        ABRecordSetValue(newRecord, kABPersonPhoneProperty, phone, &error);
         
         ABAddressBookAddRecord(addressBook, newRecord, &error);
         ABAddressBookSave(addressBook, &error);
+    
         NSLog(@"%@",newRecord);
         if(error != NULL){
             NSLog(@"Save Failed");
         }
+
         
     }
     
