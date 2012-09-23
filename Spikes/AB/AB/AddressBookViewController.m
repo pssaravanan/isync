@@ -171,10 +171,10 @@ CFTypeRef OtherLabel;
 }
 
 - (IBAction)clickAdd:(id)sender {
-    CFErrorRef error = NULL;    
-    ABAddressBookRef addressBook = ABAddressBookCreate();
-    ABRecordRef newRecord = ABPersonCreate();
-    ABRecordSetValue(newRecord, kABPersonFirstNameProperty,FirstName , &error);
+        
+    ABAddressBookRef addressBook=ABAddressBookCreate();
+    ABRecordRef newRecord=ABPersonCreate();
+    CFErrorRef error=NULL;
     ABRecordSetValue(newRecord, kABPersonLastNameProperty,LastName , &error);
     ABRecordSetValue(newRecord, kABPersonMiddleNameProperty,MiddleName , &error);
     ABRecordSetValue(newRecord, kABPersonPrefixProperty,Prefix , &error);

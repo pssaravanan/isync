@@ -23,7 +23,7 @@
     
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-    [request setURL:[NSURL URLWithString:@"https://www.google.com/m8/feeds/contacts/default/full"]];
+    [request setURL:[NSURL URLWithString:@"https://www.google.com/m8/feeds/contacts/default/full?max-results=2500"]];
     [request setHTTPMethod:@"GET"];
     [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
     

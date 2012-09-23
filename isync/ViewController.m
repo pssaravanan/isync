@@ -48,15 +48,30 @@
     [AppleID resignFirstResponder];
     [ApplePassword resignFirstResponder];
 }
-
+- (NSString *)dataFilePath:(BOOL)forSave {
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+	NSString *documentsDirectory = [paths objectAtIndex:0];
+	NSString *documentsPath = [documentsDirectory stringByAppendingPathComponent:@"GmailContacts.xml"];
+    if (forSave || [[NSFileManager defaultManager] fileExistsAtPath:documentsPath]) {
+        return documentsPath;
+    } else {
+        return [[NSBundle mainBundle] pathForResource:@"GmailContacts" ofType:@"xml"];
+    }}
 -(IBAction)synchronizeButtonPressed:(id)sender{
-   NSString *gmailIDRetrieved=GmailID.text;
-   NSString *gmailPasswordRetrieved=GmailPassword.text;
-   NSString *appleIDRetrieved=AppleID.text;
-   NSString *applePasswordRetrieved=ApplePassword.text;
-   AuthTokenFetcher *authTokenFetcher=[[AuthTokenFetcher alloc]init];
-   [authTokenFetcher fetchAuthTokenWithGmailId:gmailIDRetrieved GmailPassword:gmailPasswordRetrieved AppleID:appleIDRetrieved ApplePassword:applePasswordRetrieved];
-   [GmailContactsParser parseGmailContacts];
+    NSString *filePath = [self dataFilePath:FALSE];
+    NSMutableData *xmlData = [[NSMutableData alloc] initWithContentsOfFile:filePath];
+    [ABAddressBookInf constructAddressBookListAfterParsing:xmlData];
+
+
+
+//   NSString *gmailIDRetrieved=GmailID.text;
+//   NSString *gmailPasswordRetrieved=GmailPassword.text;
+//   NSString *appleIDRetrieved=AppleID.text;
+//   NSString *applePasswordRetrieved=ApplePassword.text;
+//   AuthTokenFetcher *authTokenFetcher=[[AuthTokenFetcher alloc]init];
+//   [authTokenFetcher fetchAuthTokenWithGmailId:gmailIDRetrieved GmailPassword:gmailPasswordRetrieved AppleID:appleIDRetrieved ApplePassword:applePasswordRetrieved];
+//   [GmailContactsParser parseGmailContacts];
 
 //    [ABAddressBookInf getAddressContactList];
 }
