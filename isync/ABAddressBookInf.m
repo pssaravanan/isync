@@ -14,12 +14,12 @@
     NSArray * peopleList = ( NSArray *) ABAddressBookCopyArrayOfAllPeople(addressBook);
     return peopleList;
 }
-+(void)constructAddressBookListAfterParsing:(NSMutableData *)xmlData{
++(NSArray *)constructAddressBookListAfterParsing:(NSMutableData *)xmlData{
     NSLog(@"SUCCESS\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
     NSError *xmlError;
     GDataXMLDocument *doc = [[GDataXMLDocument alloc] initWithData:xmlData
                                                            options:0 error:&xmlError];
-    if (doc == nil) { return; }
+    if (doc == nil) { return NULL; }
     NSLog(@"%@", doc.rootElement);
     NSArray *allContacts = [doc.rootElement elementsForName:@"entry"];
     NSLog(@"COUNT////////////");
@@ -69,9 +69,9 @@
 
         
     }
-    
+   NSArray *GmailContactList=(NSArray *) ABAddressBookCopyArrayOfAllPeople(addressBook);
     [doc release];
     [xmlData release];
-    return;
+    return GmailContactList;
 }
 @end

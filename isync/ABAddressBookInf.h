@@ -10,5 +10,5 @@
 #import <AddressBook/AddressBook.h>
 @interface ABAddressBookInf : NSObject
 +(NSArray *)getAddressContactList;
-+(void)constructAddressBookListAfterParsing:(NSMutableData *)xmlData;
++(NSArray *)constructAddressBookListAfterParsing:(NSMutableData *)xmlData;
 @end

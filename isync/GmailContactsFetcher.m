@@ -51,10 +51,11 @@
 -(void)connectionDidFinishLoading:(NSURLConnection *)connection{
     NSLog(@"conn");
     NSLog(@"Success..Received %d bytes",[self.responseData length]);
-    NSString *results = [[NSString alloc] initWithData:self.responseData encoding:NSUTF8StringEncoding];
-    NSLog(results);
-    [ABAddressBookInf constructAddressBookListAfterParsing:self.responseData];
-   
+    NSArray *IPhoneContactList=[ABAddressBookInf getAddressContactList];
+    
+    NSArray *GmailContactList=[ABAddressBookInf constructAddressBookListAfterParsing:self.responseData];
+    NSLog(@"%u",IPhoneContactList.count);
+    NSLog(@"%u",GmailContactList.count);
 }
 
 
