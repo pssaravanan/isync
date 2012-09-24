@@ -1,12 +1,16 @@
 
 #import "AddressBookViewController.h"
 #import "AddressBookUI/AddressBookUI.h"
+#import "AddressBook/AddressBook.h"
 
 @interface AddressBookViewController ()
 
 @end
 
 @implementation AddressBookViewController
+
+ABRecordID recordId;
+
 CFTypeRef FirstName ;
 CFTypeRef LastName ;
 CFTypeRef MiddleName ;
@@ -39,34 +43,36 @@ CFTypeRef WorkLabel;
 CFTypeRef HomeLabel;
 CFTypeRef OtherLabel;
 
+CFErrorRef error = NULL; 
 
 
-- (void)viewDidLoad
-{
+
+- (void)viewDidLoad {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
 }
 
-- (void)viewDidUnload
-{
+- (void)viewDidUnload {
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{  
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation{
     return YES;
     
 }
 
 
 
-- (IBAction)click:(id)sender {
+- (IBAction)clickView:(id)sender {
     
-    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Alert!!"
-                                                        message:@"View Contacts Info in Terminal!!" delegate:self
-                                              cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [alertView show];
+    [[[UIAlertView alloc] initWithTitle:@"Alert!!"
+                                message:@"View Contacts Info in Terminal!!"
+                               delegate:self
+                      cancelButtonTitle:@"OK"
+                      otherButtonTitles:nil
+      ]
+     show];
     
     ABAddressBookRef addressBook = ABAddressBookCreate();
     CFArrayRef people = ABAddressBookCopyArrayOfAllPeople(addressBook);
@@ -106,6 +112,7 @@ CFTypeRef OtherLabel;
         
         
         PhoneNumbers = ABRecordCopyValue(record,kABPersonPhoneProperty);
+        
         NSLog(@"Phone Numbers");
         int phoneNumberCount = ABMultiValueGetCount(PhoneNumbers);
         if (phoneNumberCount > 0) {
@@ -118,8 +125,7 @@ CFTypeRef OtherLabel;
         } else {
             NSLog(@"\t [None]");
         }
-        
-        
+
         EMails = (ABRecordCopyValue(record, kABPersonEmailProperty));
         NSLog(@"EMails");
         int EMailCount = ABMultiValueGetCount(EMails);
@@ -171,10 +177,88 @@ CFTypeRef OtherLabel;
 }
 
 - (IBAction)clickAdd:(id)sender {
-        
-    ABAddressBookRef addressBook=ABAddressBookCreate();
-    ABRecordRef newRecord=ABPersonCreate();
-    CFErrorRef error=NULL;
+    
+    ABAddressBookRef addressBook = ABAddressBookCreate();
+    ABRecordRef newRecord = [self createRecord];
+    recordId = ABRecordGetRecordID( newRecord);
+    ABAddressBookAddRecord(addressBook, newRecord, &error);
+    ABAddressBookSave(addressBook, &error);
+    
+    if(error != NULL){
+        NSLog(@"Save Failed");
+    }
+    
+}
+
+- (IBAction)clickDuplicateCheck:(id)sender {
+      
+    ABRecordRef newRecord1 = [self createRecord];
+    ABRecordRef newRecord2 = [self createRecord];
+    
+    [[[UIAlertView alloc] initWithTitle:@"Alert!!"
+                                message:([self isSameFirst:newRecord1 Second:newRecord2])? @"TRUE" : @"FALSE"
+                               delegate:self
+                      cancelButtonTitle:@"OK"
+                      otherButtonTitles:nil
+      ]
+     show];
+}
+
+- (IBAction)clickMerge:(id)sender {
+    
+//    ABAddressBookRef updatedAddressBook = ABAddressBookCreate();
+//    ABRecordRef person = ABAddressBookGetPersonWithRecordID(updatedAddressBook, recordId);
+//    ABRecordSetValue(person, kABPersonFirstNameProperty, @"New Name" ,&error);
+//    
+//    ABAddressBookSave(updatedAddressBook, &error);
+}
+
+
+
+
+-(BOOL) isCommonValueFoundFirst:(ABMutableMultiValueRef) first Second :(ABMutableMultiValueRef) second{
+    
+    
+    int count1 = ABMultiValueGetCount(first);
+    int count2 = ABMultiValueGetCount(second);
+    
+    if (count1 > 0 && count2 > 0) {
+        for (CFIndex i = 0; i < count1; i++) {
+            for (CFIndex j = 0; j < count2; j++) {
+                
+                if(
+                   [ (__bridge_transfer NSString*) ABMultiValueCopyValueAtIndex(first, i) isEqualToString:
+                    (__bridge_transfer NSString*) ABMultiValueCopyValueAtIndex(second, j)]
+                   ==true
+                   )
+                    return YES;
+                
+            }
+        }
+    }
+    return NO;
+}
+
+- (BOOL)isSameFirst:(ABRecordRef)first Second:(ABRecordRef)second {
+    
+    ABMutableMultiValueRef PhoneNumbers1 = ABRecordCopyValue(first,kABPersonPhoneProperty);
+    ABMutableMultiValueRef PhoneNumbers2 = ABRecordCopyValue(second,kABPersonPhoneProperty);
+    return [ self isCommonValueFoundFirst:PhoneNumbers1 Second:PhoneNumbers2];
+    
+    
+    ABMutableMultiValueRef EMail1 = ABRecordCopyValue(first,kABPersonEmailProperty);
+    ABMutableMultiValueRef EMail2 = ABRecordCopyValue(second,kABPersonEmailProperty);
+    return [ self isCommonValueFoundFirst:EMail1 Second:EMail2];
+    
+    return NO;
+    
+}
+
+
+- (ABRecordRef) createRecord {
+    
+    ABRecordRef newRecord = ABPersonCreate();
+    ABRecordSetValue(newRecord, kABPersonFirstNameProperty,FirstName , &error);
     ABRecordSetValue(newRecord, kABPersonLastNameProperty,LastName , &error);
     ABRecordSetValue(newRecord, kABPersonMiddleNameProperty,MiddleName , &error);
     ABRecordSetValue(newRecord, kABPersonPrefixProperty,Prefix , &error);
@@ -186,7 +270,7 @@ CFTypeRef OtherLabel;
     ABRecordSetValue(newRecord, kABPersonOrganizationProperty,Organization , &error);
     ABRecordSetValue(newRecord, kABPersonJobTitleProperty,JobTitle , &error);
     ABRecordSetValue(newRecord, kABPersonDepartmentProperty,Department , &error);
-
+    
     //Phone Numbers
     ABMutableMultiValueRef multiPhone = ABMultiValueCreateMutable(kABMultiStringPropertyType);
     ABMultiValueAddValueAndLabel(multiPhone, PhoneMain , kABPersonPhoneMainLabel, NULL);
@@ -197,8 +281,8 @@ CFTypeRef OtherLabel;
     ABMultiValueAddValueAndLabel(multiPhone, PhoneOtherFax , kABPersonPhoneOtherFAXLabel, NULL);
     ABMultiValueAddValueAndLabel(multiPhone, PhonePager , kABPersonPhonePagerLabel, NULL);
     ABRecordSetValue(newRecord, kABPersonPhoneProperty, multiPhone, &error);
-     
-       
+    
+    
     //Emails
     ABMutableMultiValueRef multiEmail = ABMultiValueCreateMutable(kABMultiStringPropertyType);
     ABMultiValueAddValueAndLabel(multiEmail, HomeLabel, kABHomeLabel, NULL);
@@ -209,12 +293,10 @@ CFTypeRef OtherLabel;
     
     ABRecordSetValue(newRecord, kABPersonCreationDateProperty,CreationDate , &error);
     ABRecordSetValue(newRecord, kABPersonModificationDateProperty,ModificationDate , &error);
-    ABAddressBookAddRecord(addressBook, newRecord, &error);
-    ABAddressBookSave(addressBook, &error);
     
-    if(error != NULL){
-        NSLog(@"Save Failed");
-    }
+    return newRecord;
     
 }
+
+
 @end
