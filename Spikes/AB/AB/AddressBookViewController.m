@@ -180,10 +180,9 @@ CFErrorRef error = NULL;
     
     ABAddressBookRef addressBook = ABAddressBookCreate();
     ABRecordRef newRecord = [self createRecord];
-    recordId = ABRecordGetRecordID( newRecord);
     ABAddressBookAddRecord(addressBook, newRecord, &error);
     ABAddressBookSave(addressBook, &error);
-    
+    recordId = ABRecordGetRecordID( newRecord);
     if(error != NULL){
         NSLog(@"Save Failed");
     }
@@ -206,11 +205,11 @@ CFErrorRef error = NULL;
 
 - (IBAction)clickMerge:(id)sender {
     
-//    ABAddressBookRef updatedAddressBook = ABAddressBookCreate();
-//    ABRecordRef person = ABAddressBookGetPersonWithRecordID(updatedAddressBook, recordId);
-//    ABRecordSetValue(person, kABPersonFirstNameProperty, @"New Name" ,&error);
-//    
-//    ABAddressBookSave(updatedAddressBook, &error);
+    ABAddressBookRef updatedAddressBook = ABAddressBookCreate();
+    ABRecordRef person = ABAddressBookGetPersonWithRecordID(updatedAddressBook, recordId);
+    ABRecordSetValue(person, kABPersonFirstNameProperty, @"New Name" ,&error);
+    
+    ABAddressBookSave(updatedAddressBook, &error);
 }
 
 
