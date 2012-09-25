@@ -130,6 +130,8 @@
 				84F24B8F1609DADA00204744 /* ABAddressBookInf.h */,
 				84F24B901609DADA00204744 /* ABAddressBookInf.m */,
 				3CB8B6B1160229FA0067189A /* Supporting Files */,
+				84BC07F11611F2F4004FBB5C /* Person.h */,
+				84BC07F21611F2F5004FBB5C /* Person.m */,
 			);
 			path = isync;
 			sourceTree = "<group>";

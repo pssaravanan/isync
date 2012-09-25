@@ -32,6 +32,7 @@
     NSLog(@"%@\n%@",@"authToken Fetched",token);
     [[[GmailContactsFetcher alloc] init] fetchGmailContactswithAuthToken:token CallbackObj:self];
 }
+
 -(void) contactsFetched:(NSMutableData*)contactsResponse{
     NSMutableArray* IPhoneContactList=[ABAddressBookInf getPhoneContactList];
     
@@ -174,6 +175,4 @@
     }
     return false;
 }
-
-
 @end
