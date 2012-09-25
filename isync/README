@@ -1,0 +1,21 @@
+GmailPhoneSyncer
+    
+    
+    
+    /****Steps****/
+    //gmail Auth
+    //gmail fetch
+    //gmail parse
+        //[contacts]
+    //phone fetch
+        //[contacts]
+    //Merge
+        //G'[] P'[]
+    //Phone Update
+    //Google generate XML
+    //Google Update contacts
+    
+    
+    
+    /**Implementation**/
+    //gmail auth:

@@ -5,38 +5,28 @@
 #import "Person.h"
 
 @implementation GmailIPhoneSyncer
-- (void)SyncGmailId:(NSString *)gmailId GmailPass:(NSString *)gmailpass AppleId:(NSString *)appleId ApplePass:(NSString *)applepass{
 
-    /****Steps****/
-    //gmail Auth
-    //gmail fetch
-    //gmail parse
-        //[contacts]
-    //phone fetch
-        //[contacts]
-    //Merge
-        //G'[] P'[]
-    //Phone Update
-    //Google generate XML
-    //Google Update contacts
+- (void)SyncGmailId:(NSString *)gmailId GmailPass:(NSString *)gmailpass
+            AppleId:(NSString *)appleId ApplePass:(NSString *)applepass {
     
-    
-    
-    /**Implementation**/
-    //gmail auth:
-    AuthTokenFetcher *authTokenFetcher=[[AuthTokenFetcher alloc]init];
-    [authTokenFetcher fetchAuthTokenWithGmailId:gmailId GmailPassword:gmailpass AppleID:appleId ApplePassword:applepass CallbackObj:self];
+    AuthTokenFetcher *authTokenFetcher = [[AuthTokenFetcher alloc]init];
+    [authTokenFetcher fetchAuthTokenWithGmailId:gmailId GmailPassword:gmailpass
+                                        AppleID:appleId ApplePassword:applepass
+                                        CallbackObj:self];
+
 }
 
-- (void) authTokenFetched: (NSString *) token{
+- (void) authTokenFetched: (NSString *) token {
+    
     NSLog(@"%@\n%@",@"authToken Fetched",token);
     [[[GmailContactsFetcher alloc] init] fetchGmailContactswithAuthToken:token CallbackObj:self];
+
 }
 
--(void) contactsFetched:(NSMutableData*)contactsResponse{
-    NSMutableArray* IPhoneContactList=[ABAddressBookInf getPhoneContactList];
+-(void) contactsFetched:(NSMutableData*)contactsResponse {
     
-    NSMutableArray* GmailContactList= [ABAddressBookInf getGmailContactsListAfterParsing:contactsResponse];
+    NSMutableArray* IPhoneContactList=[[ABAddressBookInf getPhoneContactList] init];
+    NSMutableArray* GmailContactList= [[ABAddressBookInf getGmailContactsListAfterParsing:contactsResponse]init];
     
     NSMutableArray* mergedListOfContacts=[[NSMutableArray alloc] init];
     
@@ -52,7 +42,7 @@
         for (Person *p2 in IPhoneContactList) {
             if ([self isSameFirst:p1 Second:p2]) {
                 foundInPhone=true;
-                
+            NSLog(@"foundInPhone\t%d",foundInPhone);
                 //foundInPhone = [self isSameFirst:p1 Second:p2];
             }
         }
@@ -66,6 +56,7 @@
         for (Person *p2 in GmailContactList) {
             if ([self isSameFirst:p1 Second:p2]) {
                 foundInGmail=true;
+            NSLog(@"foundInGmail\t%d",foundInGmail);
                  //foundInGmail = [self isSameFirst:p1 Second:p2];
             }
         }
