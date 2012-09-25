@@ -7,7 +7,7 @@
 
 +( NSMutableArray* )getPhoneContactList{
     
-    NSMutableArray* phoneContactsList=[NSMutableArray alloc];
+    NSMutableArray* phoneContactsList=[[NSMutableArray alloc] init];
     Person *person;
     
     ABAddressBookRef addressBook = ABAddressBookCreate();
@@ -21,17 +21,11 @@
         person.FirstName = (__bridge NSString *)((ABRecordCopyValue(record, kABPersonFirstNameProperty)));
         person.LastName = (__bridge NSString *)((ABRecordCopyValue(record, kABPersonLastNameProperty)));
         person.MiddleName = (__bridge NSString *)((ABRecordCopyValue(record, kABPersonMiddleNameProperty)));
-        person.Prefix = (__bridge NSString *)((ABRecordCopyValue(record, kABPersonPrefixProperty)));
-        person.Suffix = (__bridge NSString *)((ABRecordCopyValue(record, kABPersonSuffixProperty)));
-        person.Nickname = (__bridge NSString *)((ABRecordCopyValue(record, kABPersonNicknameProperty)));
-        person.FirstNamePhonetic = (__bridge NSString *)((ABRecordCopyValue(record, kABPersonFirstNamePhoneticProperty)));
-        person.LastNamePhonetic = (__bridge NSString *)((ABRecordCopyValue(record, kABPersonLastNamePhoneticProperty)));
-        person.MiddleNamePhonetic = (__bridge NSString *)((ABRecordCopyValue(record, kABPersonMiddleNamePhoneticProperty)));
         person.Organization = (__bridge NSString *)((ABRecordCopyValue(record, kABPersonOrganizationProperty)));
         person.JobTitle = (__bridge NSString *)((ABRecordCopyValue(record, kABPersonJobTitleProperty)));
         person.Department = (__bridge NSString *)((ABRecordCopyValue(record, kABPersonDepartmentProperty)));
-        person.CreationDate = (__bridge NSString *)((ABRecordCopyValue(record, kABPersonCreationDateProperty)));
-        person.ModificationDate = (__bridge NSString *)((ABRecordCopyValue(record, kABPersonModificationDateProperty)));
+//        person.CreationDate = (__bridge NSString *)((ABRecordCopyValue(record, kABPersonCreationDateProperty)));
+//        person.ModificationDate = (__bridge NSString *)((ABRecordCopyValue(record, kABPersonModificationDateProperty)));
         
         person.PhoneNumbers = (__bridge NSMutableArray *)(ABRecordCopyValue(record,kABPersonPhoneProperty));
         
@@ -39,10 +33,23 @@
         int phoneNumberCount = ABMultiValueGetCount((__bridge ABMultiValueRef)(person.PhoneNumbers));
         if (phoneNumberCount > 0) {
             for (CFIndex i = 0; i < phoneNumberCount; i++) {
-                NSLog(@"\n%@\t%@",
-                      (__bridge NSString*) ABAddressBookCopyLocalizedLabel(
-                                                                           ABMultiValueCopyLabelAtIndex((__bridge ABMultiValueRef)(person.PhoneNumbers), i)),
-                      (__bridge_transfer NSString*) ABMultiValueCopyValueAtIndex((__bridge ABMultiValueRef)(person.PhoneNumbers), i));
+                
+                NSString* phoneLabel =(__bridge NSString*) ABAddressBookCopyLocalizedLabel(
+                                                    ABMultiValueCopyLabelAtIndex((__bridge ABMultiValueRef)(person.PhoneNumbers), i));
+                NSString* phoneValue = (__bridge_transfer NSString*) ABMultiValueCopyValueAtIndex((__bridge ABMultiValueRef)
+                                                                                                  (person.PhoneNumbers), i);
+                NSLog(@"\n%@\t%@",phoneLabel,phoneValue);
+                
+                if (phoneLabel == @"mobile") {
+                    person.PhoneMobile = phoneValue;
+                }
+                if (phoneLabel == @"main") {
+                    person.PhoneMain = phoneValue;
+                }
+                if (phoneLabel == @"iPhone") {
+                    person.PhoneIPhone = phoneValue;
+                }
+                
             }
         }
         
@@ -50,11 +57,22 @@
         NSLog(@"EMails");
         int EMailCount = ABMultiValueGetCount((__bridge ABMultiValueRef)(person.EMails));
         if (EMailCount > 0) {
+            
             for (CFIndex i = 0; i < EMailCount; i++) {
-                NSLog(@"\n%@\t%@",
-                      (__bridge NSString*) ABAddressBookCopyLocalizedLabel(
-                                                                           ABMultiValueCopyLabelAtIndex((__bridge ABMultiValueRef)(person.EMails), i)),
-                      (__bridge_transfer NSString*) ABMultiValueCopyValueAtIndex((__bridge ABMultiValueRef)(person.EMails), i));
+                NSString* emailLabel = (__bridge NSString*) ABAddressBookCopyLocalizedLabel(
+                                                        ABMultiValueCopyLabelAtIndex((__bridge ABMultiValueRef)(person.EMails), i));
+                NSString* emailValue = (__bridge_transfer NSString*) ABMultiValueCopyValueAtIndex((__bridge ABMultiValueRef)(person.EMails), i);
+                
+                NSLog(@"\n%@\t%@",emailLabel, emailValue);
+                if (emailLabel == @"home") {
+                    person.HomeEmail = emailValue;
+                }
+                if (emailLabel == @"work") {
+                    person.HomeEmail = emailValue;
+                }
+                if (emailLabel == @"other") {
+                    person.HomeEmail = emailValue;
+                }                 
             }
         }
         
@@ -73,7 +91,7 @@
     NSArray *allContacts = [doc.rootElement elementsForName:@"entry"];
     NSLog(@"%u",allContacts.count);
     
-    NSMutableArray* gmailContactsList=[NSMutableArray alloc];
+    NSMutableArray* gmailContactsList=[[NSMutableArray alloc]init];
     Person *person;
     
     for (GDataXMLElement *contactElement in allContacts) {
