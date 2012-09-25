@@ -1,11 +1,3 @@
-//
-//  GmailContactsFetcher.m
-//  isync
-//
-//  Created by Admin on 18/09/12.
-//  Copyright (c) 2012 saravanp. All rights reserved.
-//
-
 #import "GmailContactsFetcher.h"
 #import "ABAddressBookInf.h"
 
@@ -56,7 +48,7 @@
 }
 
 -(void)connectionDidFinishLoading:(NSURLConnection *)connection{
-    NSLog(@"conn");
+    NSLog(@"Connected..");
     NSLog(@"Success..Received %d bytes",[self.responseData length]);
     [syncerObject contactsFetched:self.responseData];
 }

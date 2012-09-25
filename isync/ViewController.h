@@ -1,11 +1,11 @@
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController{
+@interface ViewController : UIViewController {
     UITextField *AppleID;
     UITextField *ApplePassword;
     UITextField *GmailID;
     UITextField *GmailPassword;
-    }
+}
 @property (nonatomic,strong)IBOutlet UITextField *AppleID;
 @property (nonatomic,strong)IBOutlet UITextField *ApplePassword;
 @property (nonatomic,strong)IBOutlet UITextField *GmailID;

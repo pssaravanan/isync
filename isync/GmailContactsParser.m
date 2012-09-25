@@ -1,10 +1,3 @@
-//
-//  GmailContactsParser.m
-//  isync
-//
-//  Created by Admin on 17/09/12.
-//  Copyright (c) 2012 saravanp. All rights reserved.
-//
 
 #import "GmailContactsParser.h"
 #import "GDataXMLNode.h"
@@ -19,7 +12,8 @@
         return documentsPath;
     } else {
         return [[NSBundle mainBundle] pathForResource:@"GmailContacts" ofType:@"xml"];
-    }}
+    }
+}
 + (NSString *)parseGmailContacts {
     
     NSString *filePath = [self dataFilePath:FALSE];

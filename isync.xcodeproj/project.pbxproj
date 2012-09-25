@@ -20,6 +20,8 @@
 		8493C28E160764DE000A14A9 /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 8493C28D160764DE000A14A9 /* GDataXMLNode.m */; };
 		8493C29216076673000A14A9 /* GmailContacts.xml in Resources */ = {isa = PBXBuildFile; fileRef = 8493C29116076673000A14A9 /* GmailContacts.xml */; };
 		8493C2961607676A000A14A9 /* GmailContactsParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 8493C2951607676A000A14A9 /* GmailContactsParser.m */; };
+		84BC07F31611F2F5004FBB5C /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BC07F21611F2F5004FBB5C /* Person.m */; };
+		84BC07F616122DE3004FBB5C /* README in Resources */ = {isa = PBXBuildFile; fileRef = 84BC07F516122DE3004FBB5C /* README */; };
 		84F24B911609DADA00204744 /* ABAddressBookInf.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F24B901609DADA00204744 /* ABAddressBookInf.m */; };
 		84F24B951609F88800204744 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84F24B931609F88800204744 /* AddressBook.framework */; };
 		84F24B961609F88800204744 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84F24B941609F88800204744 /* AddressBookUI.framework */; };
@@ -50,6 +52,9 @@
 		8493C29116076673000A14A9 /* GmailContacts.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = GmailContacts.xml; sourceTree = "<group>"; };
 		8493C2941607676A000A14A9 /* GmailContactsParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GmailContactsParser.h; sourceTree = "<group>"; };
 		8493C2951607676A000A14A9 /* GmailContactsParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GmailContactsParser.m; sourceTree = "<group>"; };
+		84BC07F11611F2F4004FBB5C /* Person.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Person.h; sourceTree = "<group>"; };
+		84BC07F21611F2F5004FBB5C /* Person.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Person.m; sourceTree = "<group>"; };
+		84BC07F516122DE3004FBB5C /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		84F24B8F1609DADA00204744 /* ABAddressBookInf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABAddressBookInf.h; sourceTree = "<group>"; };
 		84F24B901609DADA00204744 /* ABAddressBookInf.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABAddressBookInf.m; sourceTree = "<group>"; };
 		84F24B931609F88800204744 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
@@ -107,6 +112,8 @@
 		3CB8B6B0160229FA0067189A /* isync */ = {
 			isa = PBXGroup;
 			children = (
+				84BC07F11611F2F4004FBB5C /* Person.h */,
+				84BC07F21611F2F5004FBB5C /* Person.m */,
 				84FCD0021610B91D00739854 /* GmailIPhoneSyncer.h */,
 				84FCD0031610B91D00739854 /* GmailIPhoneSyncer.m */,
 				3CB8B6B9160229FA0067189A /* AppDelegate.h */,
@@ -137,6 +144,7 @@
 				8493C28D160764DE000A14A9 /* GDataXMLNode.m */,
 				3CB8B6B6160229FA0067189A /* main.m */,
 				3CB8B6B8160229FA0067189A /* isync-Prefix.pch */,
+				84BC07F516122DE3004FBB5C /* README */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -195,6 +203,7 @@
 				3CB8B6B5160229FA0067189A /* InfoPlist.strings in Resources */,
 				3CB8B6BE160229FA0067189A /* MainStoryboard_iPhone.storyboard in Resources */,
 				8493C29216076673000A14A9 /* GmailContacts.xml in Resources */,
+				84BC07F616122DE3004FBB5C /* README in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -214,6 +223,7 @@
 				8492A9041607B35E00354F07 /* GmailContactsFetcher.m in Sources */,
 				84F24B911609DADA00204744 /* ABAddressBookInf.m in Sources */,
 				84FCD0041610B91D00739854 /* GmailIPhoneSyncer.m in Sources */,
+				84BC07F31611F2F5004FBB5C /* Person.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
