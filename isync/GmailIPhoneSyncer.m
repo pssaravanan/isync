@@ -8,6 +8,8 @@
 
 #import "GmailIPhoneSyncer.h"
 #import "AuthTokenFetcher.h"
+#import "GmailContactsFetcher.h"
+#import "ABAddressBookInf.h"
 
 @implementation GmailIPhoneSyncer
 - (void)SyncGmailId:(NSString *)gmailId GmailPass:(NSString *)gmailpass AppleId:(NSString *)appleId ApplePass:(NSString *)applepass{
@@ -30,11 +32,17 @@
     /**Implementation**/
     //gmail auth:
     AuthTokenFetcher *authTokenFetcher=[[AuthTokenFetcher alloc]init];
-    [authTokenFetcher fetchAuthTokenWithGmailId:gmailId GmailPassword:gmailpass AppleID:appleId ApplePassword:applepass Delegate:self];
+    [authTokenFetcher fetchAuthTokenWithGmailId:gmailId GmailPassword:gmailpass AppleID:appleId ApplePassword:applepass CallbackObj:self];
 }
 
-- (id) parseXML: (NSString *) xmlData{
-    NSLog(@"%@",@"inside ParseXML");
-    [[[UIAlertView alloc] initWithTitle:@"contacts fetched" message:@"Contacts were fetched." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil] show];
+- (void) authTokenFetched: (NSString *) token{
+    NSLog(@"%@\n%@",@"authToken Fetched",token);
+    [[[GmailContactsFetcher alloc] init] fetchGmailContactswithAuthToken:token CallbackObj:self];
+}
+-(void) contactsFetched:(NSMutableData*)contactsResponse{
+    NSArray *IPhoneContactList=[ABAddressBookInf getAddressContactList];
+    
+    NSArray *GmailContactList=[ABAddressBookInf constructAddressBookListAfterParsing:contactsResponse];
+    
 }
 @end

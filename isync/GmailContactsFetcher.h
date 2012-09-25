@@ -12,5 +12,5 @@
     
 }
 
--(void)fetchGmailContactswithAuthToken:(NSString *)authToken;
+-(void)fetchGmailContactswithAuthToken:(NSString *)authToken CallbackObj:(id)callbackObj;
 @end

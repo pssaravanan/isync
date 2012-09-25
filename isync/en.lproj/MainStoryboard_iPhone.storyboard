@@ -104,7 +104,7 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="synchronizeButtonPressed:" destination="4" eventType="touchDown" id="Yaa-SJ-FvV"/>
+                                            <action selector="synchronizeButtonPressed:" destination="2" eventType="touchUpInside" id="fB8-ok-nAu"/>
                                         </connections>
                                     </button>
                                 </subviews>

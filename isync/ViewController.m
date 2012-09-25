@@ -1,16 +1,10 @@
-//
-//  ViewController.m
-//  isync
-//
-//  Created by saravanp on 13/09/12.
-//  Copyright (c) 2012 saravanp. All rights reserved.
-//
 
 #import "ViewController.h"
 #import "GmailContactsParser.h"
 #import "AuthTokenFetcher.h"
 #import "GmailContactsFetcher.h"
 #import "ABAddressBookInf.h"
+#import "GmailIPhoneSyncer.h"
 
 @interface ViewController ()
 
@@ -51,13 +45,15 @@
 
 -(IBAction)synchronizeButtonPressed:(id)sender{
 
-  NSString *gmailIDRetrieved=GmailID.text;
-  NSString *gmailPasswordRetrieved=GmailPassword.text;
-  NSString *appleIDRetrieved=AppleID.text;
-  NSString *applePasswordRetrieved=ApplePassword.text;
-  AuthTokenFetcher *authTokenFetcher=[[AuthTokenFetcher alloc]init];
-  [authTokenFetcher fetchAuthTokenWithGmailId:gmailIDRetrieved GmailPassword:gmailPasswordRetrieved AppleID:appleIDRetrieved ApplePassword:applePasswordRetrieved];
-    
+//  NSString *gmailIDRetrieved=GmailID.text;
+//  NSString *gmailPasswordRetrieved=GmailPassword.text;
+//  NSString *appleIDRetrieved=AppleID.text;
+//  NSString *applePasswordRetrieved=ApplePassword.text;
+//  AuthTokenFetcher *authTokenFetcher=[[AuthTokenFetcher alloc]init];
+//  [authTokenFetcher fetchAuthTokenWithGmailId:gmailIDRetrieved GmailPassword:gmailPasswordRetrieved AppleID:appleIDRetrieved ApplePassword:applePasswordRetrieved];
+
+
+    [[GmailIPhoneSyncer alloc] SyncGmailId:[GmailID text] GmailPass:[GmailPassword text] AppleId:[AppleID text] ApplePass:[ApplePassword text]];
 
 }
 

@@ -11,5 +11,5 @@
 @interface GmailIPhoneSyncer : NSObject{
 }
 - (void)SyncGmailId:(NSString *)gmailId GmailPass:(NSString *)gmailpass AppleId:(NSString *)appleId ApplePass:(NSString *)applepass;
-- (id) parseXML:(NSString *) xmlData;
+- (void) authTokenFetched: (NSString *) token;
 @end

@@ -9,7 +9,7 @@
 
 @implementation AddressBookViewController
 
-ABRecordID recordId;
+ABRecordID record1Id;
 
 CFTypeRef FirstName ;
 CFTypeRef LastName ;
@@ -44,8 +44,8 @@ CFTypeRef HomeLabel;
 CFTypeRef OtherLabel;
 
 CFErrorRef error = NULL; 
-
-
+ABRecordRef newRecord1;
+ABRecordRef newRecord2;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -144,45 +144,16 @@ CFErrorRef error = NULL;
     
 }
 
-- (IBAction)clickCreate:(id)sender {
-    
-    FirstName = @"Nithya";
-    LastName = @"Natarajan";
-    MiddleName = @"";
-    Prefix = @"Prefix";
-    Suffix = @"Suffix";
-    Nickname =@"Natty";
-    FirstNamePhonetic = @"FP";
-    LastNamePhonetic = @"LP";
-    MiddleNamePhonetic = @"MP";
-    Organization = @"TW";
-    JobTitle = @"App Dev";
-    Department = @"Dev ops";
-    
-    //Phone Numbers
-    PhoneMain = @"15555555555";
-    PhoneMobile = @"11234567890";
-    PhoneIPhone = @"15555555555";
-    PhoneHomeFax = @"11234567890";
-    PhoneWorkFax = @"11234567890";
-    PhoneOtherFax = @"1123456890";
-    PhonePager = @"11234567890";
-    
-    
-    //EMails
-    WorkLabel = @"nithya@thoughtworks";
-    HomeLabel = @"nithya@gmail.com";
-    OtherLabel = @"nithya@evernote";
-    
-}
+ 
 
 - (IBAction)clickAdd:(id)sender {
     
     ABAddressBookRef addressBook = ABAddressBookCreate();
-    ABRecordRef newRecord = [self createRecord];
-    ABAddressBookAddRecord(addressBook, newRecord, &error);
+    [self setUpValues];
+    newRecord1 = [self createRecord];
+    ABAddressBookAddRecord(addressBook, newRecord1, &error);
     ABAddressBookSave(addressBook, &error);
-    recordId = ABRecordGetRecordID( newRecord);
+    record1Id = ABRecordGetRecordID( newRecord1);
     if(error != NULL){
         NSLog(@"Save Failed");
     }
@@ -190,9 +161,8 @@ CFErrorRef error = NULL;
 }
 
 - (IBAction)clickDuplicateCheck:(id)sender {
-      
-    ABRecordRef newRecord1 = [self createRecord];
-    ABRecordRef newRecord2 = [self createRecord];
+    [self updateValues];
+    newRecord2 = [self createRecord];
     
     [[[UIAlertView alloc] initWithTitle:@"Alert!!"
                                 message:([self isSameFirst:newRecord1 Second:newRecord2])? @"TRUE" : @"FALSE"
@@ -203,19 +173,22 @@ CFErrorRef error = NULL;
      show];
 }
 
+
+
 - (IBAction)clickMerge:(id)sender {
     
     ABAddressBookRef updatedAddressBook = ABAddressBookCreate();
-    ABRecordRef person = ABAddressBookGetPersonWithRecordID(updatedAddressBook, recordId);
-    ABRecordSetValue(person, kABPersonFirstNameProperty, @"New Name" ,&error);
+    ABRecordRef person = ABAddressBookGetPersonWithRecordID(updatedAddressBook, record1Id);
+    if ([self isSameFirst: person Second:newRecord2]) {
+        ABRecordSetValue(person, kABPersonFirstNameProperty, (ABRecordCopyValue(newRecord2, kABPersonFirstNameProperty)),&error);
+        ABRecordSetValue(person, kABPersonLastNameProperty, (ABRecordCopyValue(newRecord2, kABPersonLastNameProperty)),&error);
+    }
     
     ABAddressBookSave(updatedAddressBook, &error);
 }
 
 
-
-
--(BOOL) isCommonValueFoundFirst:(ABMutableMultiValueRef) first Second :(ABMutableMultiValueRef) second{
+- (BOOL)isCommonValueFoundFirst:(ABMutableMultiValueRef) first Second :(ABMutableMultiValueRef) second{
     
     
     int count1 = ABMultiValueGetCount(first);
@@ -242,17 +215,14 @@ CFErrorRef error = NULL;
     
     ABMutableMultiValueRef PhoneNumbers1 = ABRecordCopyValue(first,kABPersonPhoneProperty);
     ABMutableMultiValueRef PhoneNumbers2 = ABRecordCopyValue(second,kABPersonPhoneProperty);
-    return [ self isCommonValueFoundFirst:PhoneNumbers1 Second:PhoneNumbers2];
-    
+    if( [ self isCommonValueFoundFirst:PhoneNumbers1 Second:PhoneNumbers2])
+        return YES;
     
     ABMutableMultiValueRef EMail1 = ABRecordCopyValue(first,kABPersonEmailProperty);
     ABMutableMultiValueRef EMail2 = ABRecordCopyValue(second,kABPersonEmailProperty);
     return [ self isCommonValueFoundFirst:EMail1 Second:EMail2];
     
-    return NO;
-    
 }
-
 
 - (ABRecordRef) createRecord {
     
@@ -295,6 +265,45 @@ CFErrorRef error = NULL;
     
     return newRecord;
     
+}
+
+
+-(void) setUpValues {
+    
+    FirstName = @"Nithya";
+    LastName = @"Natarajan";
+    MiddleName = @"";
+    Prefix = @"Prefix";
+    Suffix = @"Suffix";
+    Nickname =@"Natty";
+    FirstNamePhonetic = @"FP";
+    LastNamePhonetic = @"LP";
+    MiddleNamePhonetic = @"MP";
+    Organization = @"TW";
+    JobTitle = @"App Dev";
+    Department = @"Dev ops";
+    
+    //Phone Numbers
+    PhoneMain = @"15555555555";
+    PhoneMobile = @"11234567890";
+    PhoneIPhone = @"15555555555";
+    PhoneHomeFax = @"11234567890";
+    PhoneWorkFax = @"11234567890";
+    PhoneOtherFax = @"1123456890";
+    PhonePager = @"11234567890";
+    
+    
+    //EMails
+    WorkLabel = @"nithya@thoughtworks";
+    HomeLabel = @"nithya@gmail.com";
+    OtherLabel = @"nithya@evernote";
+    
+}
+
+-(void) updateValues {
+    FirstName = @"Agalya";
+    LastName = @"Loganathan";
+    PhoneMain = @"15555555555";
 }
 
 

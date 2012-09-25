@@ -9,7 +9,14 @@
 #import "GmailContactsFetcher.h"
 #import "ABAddressBookInf.h"
 
-@interface GmailContactsFetcher ()
+@interface NSObject(){
+}
+-(void)contactsFetched:(NSMutableData*)contactsResponse;
+@end
+
+@interface GmailContactsFetcher (){
+    id syncerObject;
+}
 
 @property(nonatomic, strong) NSMutableData *responseData;
 
@@ -17,10 +24,10 @@
 
 @implementation GmailContactsFetcher
 @synthesize responseData = _responseData;
--(void)fetchGmailContactswithAuthToken:(NSString *)authToken{
+-(void)fetchGmailContactswithAuthToken:(NSString *)authToken CallbackObj:(id)callbackObj{
     NSLog(@"View Loaded");
     self.responseData = [NSMutableData data];
-    
+    syncerObject=callbackObj;
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     [request setURL:[NSURL URLWithString:@"https://www.google.com/m8/feeds/contacts/default/full?max-results=2500"]];
@@ -51,11 +58,7 @@
 -(void)connectionDidFinishLoading:(NSURLConnection *)connection{
     NSLog(@"conn");
     NSLog(@"Success..Received %d bytes",[self.responseData length]);
-    NSArray *IPhoneContactList=[ABAddressBookInf getAddressContactList];
-    
-    NSArray *GmailContactList=[ABAddressBookInf constructAddressBookListAfterParsing:self.responseData];
-    NSLog(@"%u",IPhoneContactList.count);
-    NSLog(@"%u",GmailContactList.count);
+    [syncerObject contactsFetched:self.responseData];
 }
 
 

@@ -14,35 +14,17 @@
 		3CB8B6B7160229FA0067189A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CB8B6B6160229FA0067189A /* main.m */; };
 		3CB8B6BB160229FA0067189A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CB8B6BA160229FA0067189A /* AppDelegate.m */; };
 		3CB8B6BE160229FA0067189A /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3CB8B6BC160229FA0067189A /* MainStoryboard_iPhone.storyboard */; };
-		3CB8B6C1160229FA0067189A /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3CB8B6BF160229FA0067189A /* MainStoryboard_iPad.storyboard */; };
 		3CB8B6C4160229FA0067189A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CB8B6C3160229FA0067189A /* ViewController.m */; };
-		3CB8B6CC160229FB0067189A /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CB8B6CB160229FB0067189A /* SenTestingKit.framework */; };
-		3CB8B6CD160229FB0067189A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CB8B6AA160229F90067189A /* UIKit.framework */; };
-		3CB8B6CE160229FB0067189A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CB8B6AC160229F90067189A /* Foundation.framework */; };
-		3CB8B6D6160229FB0067189A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3CB8B6D4160229FB0067189A /* InfoPlist.strings */; };
-		3CB8B6D9160229FB0067189A /* isyncTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CB8B6D8160229FB0067189A /* isyncTests.m */; };
 		8492A8FD1607980200354F07 /* AuthTokenFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 8492A8FC1607980200354F07 /* AuthTokenFetcher.m */; };
 		8492A9041607B35E00354F07 /* GmailContactsFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 8492A9031607B35E00354F07 /* GmailContactsFetcher.m */; };
 		8493C28E160764DE000A14A9 /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 8493C28D160764DE000A14A9 /* GDataXMLNode.m */; };
-		8493C28F160764DE000A14A9 /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 8493C28D160764DE000A14A9 /* GDataXMLNode.m */; };
 		8493C29216076673000A14A9 /* GmailContacts.xml in Resources */ = {isa = PBXBuildFile; fileRef = 8493C29116076673000A14A9 /* GmailContacts.xml */; };
-		8493C29316076673000A14A9 /* GmailContacts.xml in Resources */ = {isa = PBXBuildFile; fileRef = 8493C29116076673000A14A9 /* GmailContacts.xml */; };
 		8493C2961607676A000A14A9 /* GmailContactsParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 8493C2951607676A000A14A9 /* GmailContactsParser.m */; };
-		8493C2971607676A000A14A9 /* GmailContactsParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 8493C2951607676A000A14A9 /* GmailContactsParser.m */; };
 		84F24B911609DADA00204744 /* ABAddressBookInf.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F24B901609DADA00204744 /* ABAddressBookInf.m */; };
 		84F24B951609F88800204744 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84F24B931609F88800204744 /* AddressBook.framework */; };
 		84F24B961609F88800204744 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84F24B941609F88800204744 /* AddressBookUI.framework */; };
+		84FCD0041610B91D00739854 /* GmailIPhoneSyncer.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FCD0031610B91D00739854 /* GmailIPhoneSyncer.m */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		3CB8B6CF160229FB0067189A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3CB8B69D160229F90067189A /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 3CB8B6A5160229F90067189A;
-			remoteInfo = isync;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		3CB8B6A6160229F90067189A /* isync.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = isync.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -56,15 +38,9 @@
 		3CB8B6B9160229FA0067189A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		3CB8B6BA160229FA0067189A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		3CB8B6BD160229FA0067189A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
-		3CB8B6C0160229FA0067189A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
 		3CB8B6C2160229FA0067189A /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		3CB8B6C3160229FA0067189A /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		3CB8B6CA160229FB0067189A /* isyncTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = isyncTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3CB8B6CB160229FB0067189A /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
-		3CB8B6D3160229FB0067189A /* isyncTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "isyncTests-Info.plist"; sourceTree = "<group>"; };
-		3CB8B6D5160229FB0067189A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		3CB8B6D7160229FB0067189A /* isyncTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = isyncTests.h; sourceTree = "<group>"; };
-		3CB8B6D8160229FB0067189A /* isyncTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = isyncTests.m; sourceTree = "<group>"; };
 		8492A8FB1607980200354F07 /* AuthTokenFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthTokenFetcher.h; sourceTree = "<group>"; };
 		8492A8FC1607980200354F07 /* AuthTokenFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthTokenFetcher.m; sourceTree = "<group>"; };
 		8492A9021607B35E00354F07 /* GmailContactsFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GmailContactsFetcher.h; sourceTree = "<group>"; };
@@ -78,6 +54,8 @@
 		84F24B901609DADA00204744 /* ABAddressBookInf.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABAddressBookInf.m; sourceTree = "<group>"; };
 		84F24B931609F88800204744 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		84F24B941609F88800204744 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
+		84FCD0021610B91D00739854 /* GmailIPhoneSyncer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GmailIPhoneSyncer.h; sourceTree = "<group>"; };
+		84FCD0031610B91D00739854 /* GmailIPhoneSyncer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GmailIPhoneSyncer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,16 +71,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		3CB8B6C6160229FB0067189A /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3CB8B6CC160229FB0067189A /* SenTestingKit.framework in Frameworks */,
-				3CB8B6CD160229FB0067189A /* UIKit.framework in Frameworks */,
-				3CB8B6CE160229FB0067189A /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -110,7 +78,6 @@
 			isa = PBXGroup;
 			children = (
 				3CB8B6B0160229FA0067189A /* isync */,
-				3CB8B6D1160229FB0067189A /* isyncTests */,
 				3CB8B6A9160229F90067189A /* Frameworks */,
 				3CB8B6A7160229F90067189A /* Products */,
 			);
@@ -120,7 +87,6 @@
 			isa = PBXGroup;
 			children = (
 				3CB8B6A6160229F90067189A /* isync.app */,
-				3CB8B6CA160229FB0067189A /* isyncTests.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -141,10 +107,11 @@
 		3CB8B6B0160229FA0067189A /* isync */ = {
 			isa = PBXGroup;
 			children = (
+				84FCD0021610B91D00739854 /* GmailIPhoneSyncer.h */,
+				84FCD0031610B91D00739854 /* GmailIPhoneSyncer.m */,
 				3CB8B6B9160229FA0067189A /* AppDelegate.h */,
 				3CB8B6BA160229FA0067189A /* AppDelegate.m */,
 				3CB8B6BC160229FA0067189A /* MainStoryboard_iPhone.storyboard */,
-				3CB8B6BF160229FA0067189A /* MainStoryboard_iPad.storyboard */,
 				3CB8B6C2160229FA0067189A /* ViewController.h */,
 				3CB8B6C3160229FA0067189A /* ViewController.m */,
 				8492A8FB1607980200354F07 /* AuthTokenFetcher.h */,
@@ -174,25 +141,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		3CB8B6D1160229FB0067189A /* isyncTests */ = {
-			isa = PBXGroup;
-			children = (
-				3CB8B6D7160229FB0067189A /* isyncTests.h */,
-				3CB8B6D8160229FB0067189A /* isyncTests.m */,
-				3CB8B6D2160229FB0067189A /* Supporting Files */,
-			);
-			path = isyncTests;
-			sourceTree = "<group>";
-		};
-		3CB8B6D2160229FB0067189A /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				3CB8B6D3160229FB0067189A /* isyncTests-Info.plist */,
-				3CB8B6D4160229FB0067189A /* InfoPlist.strings */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -212,25 +160,6 @@
 			productName = isync;
 			productReference = 3CB8B6A6160229F90067189A /* isync.app */;
 			productType = "com.apple.product-type.application";
-		};
-		3CB8B6C9160229FB0067189A /* isyncTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 3CB8B6DF160229FB0067189A /* Build configuration list for PBXNativeTarget "isyncTests" */;
-			buildPhases = (
-				3CB8B6C5160229FB0067189A /* Sources */,
-				3CB8B6C6160229FB0067189A /* Frameworks */,
-				3CB8B6C7160229FB0067189A /* Resources */,
-				3CB8B6C8160229FB0067189A /* ShellScript */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				3CB8B6D0160229FB0067189A /* PBXTargetDependency */,
-			);
-			name = isyncTests;
-			productName = isyncTests;
-			productReference = 3CB8B6CA160229FB0067189A /* isyncTests.octest */;
-			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
 
@@ -254,7 +183,6 @@
 			projectRoot = "";
 			targets = (
 				3CB8B6A5160229F90067189A /* isync */,
-				3CB8B6C9160229FB0067189A /* isyncTests */,
 			);
 		};
 /* End PBXProject section */
@@ -266,37 +194,11 @@
 			files = (
 				3CB8B6B5160229FA0067189A /* InfoPlist.strings in Resources */,
 				3CB8B6BE160229FA0067189A /* MainStoryboard_iPhone.storyboard in Resources */,
-				3CB8B6C1160229FA0067189A /* MainStoryboard_iPad.storyboard in Resources */,
 				8493C29216076673000A14A9 /* GmailContacts.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		3CB8B6C7160229FB0067189A /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3CB8B6D6160229FB0067189A /* InfoPlist.strings in Resources */,
-				8493C29316076673000A14A9 /* GmailContacts.xml in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		3CB8B6C8160229FB0067189A /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		3CB8B6A2160229F90067189A /* Sources */ = {
@@ -311,28 +213,11 @@
 				8492A8FD1607980200354F07 /* AuthTokenFetcher.m in Sources */,
 				8492A9041607B35E00354F07 /* GmailContactsFetcher.m in Sources */,
 				84F24B911609DADA00204744 /* ABAddressBookInf.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		3CB8B6C5160229FB0067189A /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3CB8B6D9160229FB0067189A /* isyncTests.m in Sources */,
-				8493C28F160764DE000A14A9 /* GDataXMLNode.m in Sources */,
-				8493C2971607676A000A14A9 /* GmailContactsParser.m in Sources */,
+				84FCD0041610B91D00739854 /* GmailIPhoneSyncer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		3CB8B6D0160229FB0067189A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 3CB8B6A5160229F90067189A /* isync */;
-			targetProxy = 3CB8B6CF160229FB0067189A /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		3CB8B6B3160229FA0067189A /* InfoPlist.strings */ = {
@@ -349,22 +234,6 @@
 				3CB8B6BD160229FA0067189A /* en */,
 			);
 			name = MainStoryboard_iPhone.storyboard;
-			sourceTree = "<group>";
-		};
-		3CB8B6BF160229FA0067189A /* MainStoryboard_iPad.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3CB8B6C0160229FA0067189A /* en */,
-			);
-			name = MainStoryboard_iPad.storyboard;
-			sourceTree = "<group>";
-		};
-		3CB8B6D4160229FB0067189A /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3CB8B6D5160229FB0067189A /* en */,
-			);
-			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -424,6 +293,7 @@
 		3CB8B6DD160229FB0067189A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "isync/isync-Prefix.pch";
 				HEADER_SEARCH_PATHS = /usr/include/libxml2;
@@ -437,6 +307,7 @@
 		3CB8B6DE160229FB0067189A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "isync/isync-Prefix.pch";
 				HEADER_SEARCH_PATHS = /usr/include/libxml2;
@@ -444,40 +315,6 @@
 				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
-			};
-			name = Release;
-		};
-		3CB8B6E0160229FB0067189A /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/isync.app/isync";
-				FRAMEWORK_SEARCH_PATHS = (
-					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
-					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "isync/isync-Prefix.pch";
-				INFOPLIST_FILE = "isyncTests/isyncTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
-			};
-			name = Debug;
-		};
-		3CB8B6E1160229FB0067189A /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/isync.app/isync";
-				FRAMEWORK_SEARCH_PATHS = (
-					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
-					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "isync/isync-Prefix.pch";
-				INFOPLIST_FILE = "isyncTests/isyncTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
 			};
 			name = Release;
 		};
@@ -498,15 +335,6 @@
 			buildConfigurations = (
 				3CB8B6DD160229FB0067189A /* Debug */,
 				3CB8B6DE160229FB0067189A /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		3CB8B6DF160229FB0067189A /* Build configuration list for PBXNativeTarget "isyncTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				3CB8B6E0160229FB0067189A /* Debug */,
-				3CB8B6E1160229FB0067189A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

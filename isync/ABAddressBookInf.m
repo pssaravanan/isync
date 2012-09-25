@@ -71,7 +71,7 @@
         ABRecordSetValue(newRecord, kABPersonPhoneProperty, phoneNumberRef, &error);
         
         ABAddressBookAddRecord(addressBook, newRecord, &error);
-        ABAddressBookSave(addressBook, &error);
+//        ABAddressBookSave(addressBook, &error);
         NSLog(@"%@",newRecord);
         if(error != NULL){
             NSLog(@"Save Failed");

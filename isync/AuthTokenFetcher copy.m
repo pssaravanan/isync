@@ -11,7 +11,7 @@
 
 @interface NSObject(){
 }
--(void)authTokenFetched:(NSString*)token;
+-(void)parseXML:(NSString*)xmlData;
 @end
 
 @interface AuthTokenFetcher(){
@@ -62,16 +62,16 @@
     NSLog(@"conn");
     NSLog(@"Success..Received %d bytes",[self.responseData length]);
     NSString *results = [[NSString alloc] initWithData:self.responseData encoding:NSUTF8StringEncoding];
-    
+
     NSRange range=[results rangeOfString:@"Auth="];
     if (range.length>0) {
         NSUInteger fromIndex = range.location;
         self.AuthToken = [results substringFromIndex:fromIndex + range.length];
-        
+    
         NSUInteger toIndex = [self.AuthToken rangeOfString:@"\n"].location;
         self.AuthToken = [self.AuthToken substringToIndex:toIndex];
-        
-        [syncerObject authTokenFetched:self.AuthToken];
+
+        [syncerObject parseXML:self.AuthToken];
         
         //GmailContactxhkjdvbxsFetcher *gmailContactsFetcher=[[GmailContactsFetcher alloc]init];
         //[gkxcjvgkxjvgkxjvmailContactsFetcher fetchGmailContactswithAuthToken:self.AuthToken];
