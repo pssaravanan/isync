@@ -1,20 +1,17 @@
-//
-//  ABAddressBookInf.m
-//  isync
-//
-//  Created by Nithya on 19/09/12.
-//  Copyright (c) 2012 saravanp. All rights reserved.
-//
 
 #import "ABAddressBookInf.h"
 #import "GDataXMLNode.h"
+#import "Person.h"
+
 @implementation ABAddressBookInf
-+( NSArray* )getAddressContactList{
+
++( CFArrayRef)getPhoneContactList{
     ABAddressBookRef addressBook =  ABAddressBookCreate();
-    NSArray * peopleList = (__bridge  NSArray *) ABAddressBookCopyArrayOfAllPeople(addressBook);
+    CFArrayRef peopleList = ABAddressBookCopyArrayOfAllPeople(addressBook);
     return peopleList;
 }
-+(NSArray *)constructAddressBookListAfterParsing:(NSMutableData *)xmlData{
+
++(NSMutableArray *)getGmailContactsListAfterParsing:(NSMutableData *)xmlData{
     NSError *xmlError;
     GDataXMLDocument *doc = [[GDataXMLDocument alloc] initWithData:xmlData
                                                            options:0 error:&xmlError];
@@ -23,61 +20,61 @@
     NSArray *allContacts = [doc.rootElement elementsForName:@"entry"];
     NSLog(@"%u",allContacts.count);
     
-    CFErrorRef error = NULL;
-    ABAddressBookRef addressBook = ABAddressBookCreate();
+    NSMutableArray* gmailContactsList=[NSMutableArray alloc];
+
+    Person *person;
     
     for (GDataXMLElement *contactElement in allContacts) {
+
+        person=[[Person alloc] init];
         
-        ABRecordRef newRecord = ABPersonCreate();
-        NSString *name = [[[contactElement elementsForName:@"title"] objectAtIndex:0] stringValue];
-        ABRecordSetValue(newRecord, kABPersonFirstNameProperty,(__bridge CFTypeRef)(name) , &error);
+        
+        person.FirstName = [[[contactElement elementsForName:@"title"] objectAtIndex:0] stringValue];
+        
+        
         //Email
-        ABMutableMultiValueRef multiEmail = ABMultiValueCreateMutable(kABMultiStringPropertyType);
         NSArray *emailElement=[contactElement elementsForName:@"gd:email"];
+        person.EMails=[[NSMutableArray alloc] init];
+                
         for(GDataXMLElement *element in emailElement){
             NSString *emailAddress = [[element attributeForName:@"address"] stringValue];
+            
+            [person.EMails addObject:emailAddress];
+
             NSString *label = [[element attributeForName:@"rel"]stringValue];
             if([label rangeOfString:@"home"].length != 0){
-                ABMultiValueAddValueAndLabel(multiEmail, (__bridge CFTypeRef)(emailAddress), kABHomeLabel, NULL);
+                person.HomeEmail=emailAddress;
             }
             if([label rangeOfString:@"work"].length != 0){
-                ABMultiValueAddValueAndLabel(multiEmail, (__bridge CFTypeRef)(emailAddress), kABWorkLabel, NULL);
+                person.WorkEmail=emailAddress;
             }
             if([label rangeOfString:@"other"].length != 0){
-                ABMultiValueAddValueAndLabel(multiEmail, (__bridge CFTypeRef)(emailAddress), kABOtherLabel, NULL);
+                person.OtherEmail=emailAddress;
             }
-            NSLog(@"%@",emailAddress);
             
         }
-        ABRecordSetValue(newRecord, kABPersonEmailProperty, multiEmail, &error);
         
         NSArray *phoneNumbers = [contactElement elementsForName:@"gd:phoneNumber"];
-        ABMultiValueRef phoneNumberRef = ABMultiValueCreateMutable(kABMultiStringPropertyType);
+        person.PhoneNumbers=[[NSMutableArray alloc] init];
+
         for(GDataXMLElement *phoneNumber in phoneNumbers){
             NSString *phone = [phoneNumber stringValue];
-            NSLog(@"%@", phone);
+            
             NSString *label = [[phoneNumber attributeForName:@"rel"]stringValue];
             if(label == (id)[NSNull null] || label.length == 0){
                 label = [[phoneNumber attributeForName:@"label"] stringValue];
             }
             if([label rangeOfString:@"main"].length != 0){
-                ABMultiValueAddValueAndLabel(phoneNumberRef, (__bridge CFTypeRef)(phone), kABPersonPhoneMainLabel, NULL);
+                person.PhoneMain=phone;
             }
             if([label rangeOfString:@"mobile"].length != 0){
-                ABMultiValueAddValueAndLabel(phoneNumberRef, (__bridge CFTypeRef)(phone), kABPersonPhoneMobileLabel, NULL);
+                person.PhoneMobile=phone;
             }
             
         }
-        ABRecordSetValue(newRecord, kABPersonPhoneProperty, phoneNumberRef, &error);
-        
-        ABAddressBookAddRecord(addressBook, newRecord, &error);
-//        ABAddressBookSave(addressBook, &error);
-        NSLog(@"%@",newRecord);
-        if(error != NULL){
-            NSLog(@"Save Failed");
-        }
+        [gmailContactsList addObject:person];
     }
-    NSArray *GmailContactList= (__bridge  NSArray *) ABAddressBookCopyArrayOfAllPeople(addressBook);
-    return GmailContactList;
+    
+    return gmailContactsList;
 }
 @end
