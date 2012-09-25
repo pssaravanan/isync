@@ -18,7 +18,7 @@
     NSString *AuthToken;
     id <FetcherDelegate> delegate;
 }
-@property(nonatomic,assign) id<FetcherDelegate> delegate;
-@property(nonatomic,retain) NSString *AuthToken;
+@property(nonatomic,weak) id<FetcherDelegate> delegate;
+@property(nonatomic,strong) NSString *AuthToken;
 -(void)fetchAuthTokenWithGmailId:(NSString *)GmailID GmailPassword:(NSString *)GmailPassword AppleID:(NSString *)AppleID ApplePassword:(NSString *)ApplePassword CallbackObj:(id)callbackObj;
 @end

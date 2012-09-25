@@ -11,7 +11,7 @@
 @implementation ABAddressBookInf
 +( NSArray* )getAddressContactList{
     ABAddressBookRef addressBook =  ABAddressBookCreate();
-    NSArray * peopleList = ( NSArray *) ABAddressBookCopyArrayOfAllPeople(addressBook);
+    NSArray * peopleList = (__bridge  NSArray *) ABAddressBookCopyArrayOfAllPeople(addressBook);
     return peopleList;
 }
 +(NSArray *)constructAddressBookListAfterParsing:(NSMutableData *)xmlData{
@@ -30,7 +30,7 @@
         
         ABRecordRef newRecord = ABPersonCreate();
         NSString *name = [[[contactElement elementsForName:@"title"] objectAtIndex:0] stringValue];
-        ABRecordSetValue(newRecord, kABPersonFirstNameProperty,name , &error);
+        ABRecordSetValue(newRecord, kABPersonFirstNameProperty,(__bridge CFTypeRef)(name) , &error);
         //Email
         ABMutableMultiValueRef multiEmail = ABMultiValueCreateMutable(kABMultiStringPropertyType);
         NSArray *emailElement=[contactElement elementsForName:@"gd:email"];
@@ -38,13 +38,13 @@
             NSString *emailAddress = [[element attributeForName:@"address"] stringValue];
             NSString *label = [[element attributeForName:@"rel"]stringValue];
             if([label rangeOfString:@"home"].length != 0){
-                ABMultiValueAddValueAndLabel(multiEmail, emailAddress, kABHomeLabel, NULL);
+                ABMultiValueAddValueAndLabel(multiEmail, (__bridge CFTypeRef)(emailAddress), kABHomeLabel, NULL);
             }
             if([label rangeOfString:@"work"].length != 0){
-                ABMultiValueAddValueAndLabel(multiEmail, emailAddress, kABWorkLabel, NULL);
+                ABMultiValueAddValueAndLabel(multiEmail, (__bridge CFTypeRef)(emailAddress), kABWorkLabel, NULL);
             }
             if([label rangeOfString:@"other"].length != 0){
-                ABMultiValueAddValueAndLabel(multiEmail, emailAddress, kABOtherLabel, NULL);
+                ABMultiValueAddValueAndLabel(multiEmail, (__bridge CFTypeRef)(emailAddress), kABOtherLabel, NULL);
             }
             NSLog(@"%@",emailAddress);
             
@@ -61,10 +61,10 @@
                 label = [[phoneNumber attributeForName:@"label"] stringValue];
             }
             if([label rangeOfString:@"main"].length != 0){
-                ABMultiValueAddValueAndLabel(phoneNumberRef, phone, kABPersonPhoneMainLabel, NULL);
+                ABMultiValueAddValueAndLabel(phoneNumberRef, (__bridge CFTypeRef)(phone), kABPersonPhoneMainLabel, NULL);
             }
             if([label rangeOfString:@"mobile"].length != 0){
-                ABMultiValueAddValueAndLabel(phoneNumberRef, phone, kABPersonPhoneMobileLabel, NULL);
+                ABMultiValueAddValueAndLabel(phoneNumberRef, (__bridge CFTypeRef)(phone), kABPersonPhoneMobileLabel, NULL);
             }
             
         }
@@ -77,9 +77,7 @@
             NSLog(@"Save Failed");
         }
     }
-   NSArray *GmailContactList=(NSArray *) ABAddressBookCopyArrayOfAllPeople(addressBook);
-    [doc release];
-    [xmlData release];
+    NSArray *GmailContactList= (__bridge  NSArray *) ABAddressBookCopyArrayOfAllPeople(addressBook);
     return GmailContactList;
 }
 @end

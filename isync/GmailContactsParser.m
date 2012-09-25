@@ -30,8 +30,6 @@
     if (doc == nil) { return nil; }
     
     NSLog(@"%@", doc.rootElement);
-    [doc release];
-    [xmlData release];
     return nil;
     
 }
