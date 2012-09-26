@@ -186,8 +186,8 @@ typedef enum GDataDescRecTypes {
 } GDataDescRecTypes;
 
 typedef struct GDataDescriptionRecord {
-  NSString *label;
-  NSString *keyPath;
+  __unsafe_unretained NSString *label;
+  __unsafe_unretained NSString *keyPath;
   GDataDescRecTypes reportType;
 } GDataDescriptionRecord;
 

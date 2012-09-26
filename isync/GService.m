@@ -11,7 +11,7 @@
 @implementation GService
 
 static NSString *userName;
-static NString *passWord;
+static NSString *passWord;
 static GDataServiceGoogleContact *service;
 
 +(GDataServiceGoogleContact *) authenticateWithUserName:(NSString *)username passWord:(NSString *)password{
