@@ -3,8 +3,11 @@
 #import "GmailContactsFetcher.h"
 #import "ABAddressBookInf.h"
 #import "Person.h"
+#import "GData.h"
+#import "GDataContacts.h"
 
 @implementation GmailIPhoneSyncer
+@synthesize authToken;
 
 - (void)SyncGmailId:(NSString *)gmailId GmailPass:(NSString *)gmailpass
             AppleId:(NSString *)appleId ApplePass:(NSString *)applepass {
@@ -150,10 +153,63 @@
     }
     
 }
-
 - (void) addContactsToGmail:(NSMutableArray*) contactsToBeAddedToGmail{
+    GDataServiceGoogleContact *service = [[GDataServiceGoogleContact alloc]init];
+    NSURL *postURL = [NSURL URLWithString:@"https://www.google.com/m8/feeds/contacts/default/full/"];
+    [service setShouldCacheResponseData:YES];
+    [service setServiceShouldFollowNextLinks:YES];
+    [service setAuthToken:self.authToken];
+    
+    for(Person *person in contactsToBeAddedToGmail){
+        GDataEmail *emailObj;
+        GDataEntryContact *newContact = [GDataEntryContact contactEntryWithFullNameString:person.FirstName];
+        if(person.EMails.count  >0){
+            if(![self nullorempty:person.HomeEmail]){
+                emailObj = [GDataEmail emailWithLabel:nil
+                                              address:person.HomeEmail];
+                [emailObj setRel:kGDataContactOther];
+                [emailObj setIsPrimary:YES];
+                
+            }
+            
+            if(![self nullorempty:person.OtherEmail]){
+                emailObj = [GDataEmail emailWithLabel:nil
+                                              address:person.OtherEmail];
+                [emailObj setRel:kGDataContactOther];
+                [emailObj setIsPrimary:NO];
+                
+            }
+            
+            if(![self nullorempty:person.WorkEmail]){
+                emailObj = [GDataEmail emailWithLabel:nil
+                                              address:person.WorkEmail];
+                [emailObj setRel:kGDataContactOther];
+                [emailObj setIsPrimary:NO];
+                
+            }
+            [newContact addEmailAddress:emailObj];
+            
+            //
+            //        GDataEmail *otherEmail = [GDataEmail emailWithLabel:@"other"
+            //                                                  address:person.OtherEmail];
+            //        [otherEmail setRel:kGDataContactOther];
+            //        [otherEmail setIsPrimary:NO];
+            
+            //[newContact addEmailAddress:otherEmail];
+            [service fetchEntryByInsertingEntry:newContact
+                                     forFeedURL:postURL
+                                       delegate:self
+                              didFinishSelector:@selector(addContactTicket:addedEntry:error:)];
+        }
+    }
+}
+// add contact callback
+- (void)addContactTicket:(GDataServiceTicket *)ticket
+              addedEntry:(GDataEntryContact *)object
+                   error:(NSError *)error {
     
 }
+
 
 
 - (void) mergeContactsToPhone:contactsToBeUpdatedInPhone{

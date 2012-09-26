@@ -17,6 +17,8 @@
         person=[[Person alloc] init];
 
         ABRecordRef record = CFArrayGetValueAtIndex(people,i);
+        person.FirstName=@"123";
+        NSLog(@"%@",person.FirstName);
         
         person.phonePersonId =  ABRecordGetRecordID (record);
         person.FirstName = (__bridge NSString *)((ABRecordCopyValue(record, kABPersonFirstNameProperty)));
