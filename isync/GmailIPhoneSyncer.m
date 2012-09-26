@@ -101,17 +101,25 @@
         
         //Phone Numbers
         ABMutableMultiValueRef multiPhone = ABMultiValueCreateMutable(kABMultiStringPropertyType);
-        ABMultiValueAddValueAndLabel(multiPhone, (__bridge CFTypeRef)(person.PhoneMain) , kABPersonPhoneMainLabel, NULL);
-        ABMultiValueAddValueAndLabel(multiPhone, (__bridge CFTypeRef)(person.PhoneMobile) , kABPersonPhoneMobileLabel, NULL);
-        ABMultiValueAddValueAndLabel(multiPhone, (__bridge CFTypeRef)(person.PhoneIPhone), kABPersonPhoneIPhoneLabel, NULL);
+        if(![self nullorempty:person.PhoneMain])
+            ABMultiValueAddValueAndLabel(multiPhone, (__bridge CFTypeRef)(person.PhoneMain) , kABPersonPhoneMainLabel, NULL);
+        if(![self nullorempty:person.PhoneMobile])
+            ABMultiValueAddValueAndLabel(multiPhone, (__bridge CFTypeRef)(person.PhoneMobile) , kABPersonPhoneMobileLabel, NULL);
+        if(![self nullorempty:person.PhoneIPhone])
+            ABMultiValueAddValueAndLabel(multiPhone, (__bridge CFTypeRef)(person.PhoneIPhone), kABPersonPhoneIPhoneLabel, NULL);
+        
         ABRecordSetValue(newRecord, kABPersonPhoneProperty, multiPhone, &error);
         
         
         //Emails
         ABMutableMultiValueRef multiEmail = ABMultiValueCreateMutable(kABMultiStringPropertyType);
-        ABMultiValueAddValueAndLabel(multiEmail, (__bridge CFTypeRef)(person.HomeEmail), kABHomeLabel, NULL);
-        ABMultiValueAddValueAndLabel(multiEmail, (__bridge CFTypeRef)(person.WorkEmail), kABWorkLabel, NULL);
-        ABMultiValueAddValueAndLabel(multiEmail, (__bridge CFTypeRef)(person.OtherEmail), kABOtherLabel, NULL);
+        if(![self nullorempty:person.HomeEmail])
+            ABMultiValueAddValueAndLabel(multiEmail, (__bridge CFTypeRef)(person.HomeEmail), kABHomeLabel, NULL);
+        if(![self nullorempty:person.WorkEmail])
+            ABMultiValueAddValueAndLabel(multiEmail, (__bridge CFTypeRef)(person.WorkEmail), kABWorkLabel, NULL);
+        if(![self nullorempty:person.OtherEmail])
+            ABMultiValueAddValueAndLabel(multiEmail, (__bridge CFTypeRef)(person.OtherEmail), kABOtherLabel, NULL);
+        
         ABRecordSetValue(newRecord, kABPersonEmailProperty, multiEmail, &error);
         
         
@@ -132,6 +140,15 @@
 
 
 - (void) mergeContactsToPhone:contactsToBeUpdatedInPhone{
+    
+//    ABAddressBookRef updatedAddressBook = ABAddressBookCreate();
+//    ABRecordRef record = ABAddressBookGetPersonWithRecordID(updatedAddressBook, person.id);
+//
+//    ABRecordSetValue(record, kABPersonFirstNameProperty, person.FirstName,&error);
+//    ABRecordSetValue(record, kABPersonLastNameProperty, person.LastName,&error);
+//    
+//    
+//    ABAddressBookSave(updatedAddressBook, &error);
     
 }
 
