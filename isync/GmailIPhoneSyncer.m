@@ -84,44 +84,61 @@
 
 }
 
+
+- (ABRecordRef) setRecordForPhone:(ABRecordRef) newRecord Person :(Person *)person Error : (CFErrorRef) error{
+    
+    if(![self nullorempty:person.FirstName])
+        ABRecordSetValue(newRecord, kABPersonFirstNameProperty,(__bridge CFTypeRef)(person.FirstName) , &error);
+    if(![self nullorempty:person.LastName])
+        ABRecordSetValue(newRecord, kABPersonLastNameProperty,(__bridge CFTypeRef)(person.LastName) , &error);
+    if(![self nullorempty:person.MiddleName])
+        ABRecordSetValue(newRecord, kABPersonMiddleNameProperty,(__bridge CFTypeRef)(person.MiddleName) , &error);
+    if(![self nullorempty:person.Organization])
+        ABRecordSetValue(newRecord, kABPersonOrganizationProperty,(__bridge CFTypeRef)(person.Organization) , &error);
+    if(![self nullorempty:person.JobTitle])
+        ABRecordSetValue(newRecord, kABPersonJobTitleProperty,(__bridge CFTypeRef)(person.JobTitle) , &error);
+    if(![self nullorempty:person.Department])
+        ABRecordSetValue(newRecord, kABPersonDepartmentProperty,(__bridge CFTypeRef)(person.Department) , &error);
+    
+    //Phone Numbers
+    ABMutableMultiValueRef multiPhone = ABMultiValueCreateMutable(kABMultiStringPropertyType);
+    if(![self nullorempty:person.PhoneMain])
+        ABMultiValueAddValueAndLabel(multiPhone, (__bridge CFTypeRef)(person.PhoneMain) , kABPersonPhoneMainLabel, NULL);
+    if(![self nullorempty:person.PhoneMobile])
+        ABMultiValueAddValueAndLabel(multiPhone, (__bridge CFTypeRef)(person.PhoneMobile) , kABPersonPhoneMobileLabel, NULL);
+    if(![self nullorempty:person.PhoneIPhone])
+        ABMultiValueAddValueAndLabel(multiPhone, (__bridge CFTypeRef)(person.PhoneIPhone), kABPersonPhoneIPhoneLabel, NULL);
+    
+    ABRecordSetValue(newRecord, kABPersonPhoneProperty, multiPhone, &error);
+    
+    
+    //Emails
+    ABMutableMultiValueRef multiEmail = ABMultiValueCreateMutable(kABMultiStringPropertyType);
+    if(![self nullorempty:person.HomeEmail])
+        ABMultiValueAddValueAndLabel(multiEmail, (__bridge CFTypeRef)(person.HomeEmail), kABHomeLabel, NULL);
+    if(![self nullorempty:person.WorkEmail])
+        ABMultiValueAddValueAndLabel(multiEmail, (__bridge CFTypeRef)(person.WorkEmail), kABWorkLabel, NULL);
+    if(![self nullorempty:person.OtherEmail])
+        ABMultiValueAddValueAndLabel(multiEmail, (__bridge CFTypeRef)(person.OtherEmail), kABOtherLabel, NULL);
+    
+    ABRecordSetValue(newRecord, kABPersonEmailProperty, multiEmail, &error);
+
+    return newRecord;
+    
+}
+
+
 - (void) addContactsToPhone:(NSMutableArray*) contactsToBeAddedToPhone{
+    
+    
     CFErrorRef error = NULL;
     ABAddressBookRef addressBook = ABAddressBookCreate();
     
     for (Person* person in contactsToBeAddedToPhone) {
         
-        ABRecordRef newRecord = ABPersonCreate();        
+        ABRecordRef newRecord = ABPersonCreate();
         
-        ABRecordSetValue(newRecord, kABPersonFirstNameProperty,(__bridge CFTypeRef)(person.FirstName) , &error);
-        ABRecordSetValue(newRecord, kABPersonLastNameProperty,(__bridge CFTypeRef)(person.LastName) , &error);
-        ABRecordSetValue(newRecord, kABPersonMiddleNameProperty,(__bridge CFTypeRef)(person.MiddleName) , &error);
-        ABRecordSetValue(newRecord, kABPersonOrganizationProperty,(__bridge CFTypeRef)(person.Organization) , &error);
-        ABRecordSetValue(newRecord, kABPersonJobTitleProperty,(__bridge CFTypeRef)(person.JobTitle) , &error);
-        ABRecordSetValue(newRecord, kABPersonDepartmentProperty,(__bridge CFTypeRef)(person.Department) , &error);
-        
-        //Phone Numbers
-        ABMutableMultiValueRef multiPhone = ABMultiValueCreateMutable(kABMultiStringPropertyType);
-        if(![self nullorempty:person.PhoneMain])
-            ABMultiValueAddValueAndLabel(multiPhone, (__bridge CFTypeRef)(person.PhoneMain) , kABPersonPhoneMainLabel, NULL);
-        if(![self nullorempty:person.PhoneMobile])
-            ABMultiValueAddValueAndLabel(multiPhone, (__bridge CFTypeRef)(person.PhoneMobile) , kABPersonPhoneMobileLabel, NULL);
-        if(![self nullorempty:person.PhoneIPhone])
-            ABMultiValueAddValueAndLabel(multiPhone, (__bridge CFTypeRef)(person.PhoneIPhone), kABPersonPhoneIPhoneLabel, NULL);
-        
-        ABRecordSetValue(newRecord, kABPersonPhoneProperty, multiPhone, &error);
-        
-        
-        //Emails
-        ABMutableMultiValueRef multiEmail = ABMultiValueCreateMutable(kABMultiStringPropertyType);
-        if(![self nullorempty:person.HomeEmail])
-            ABMultiValueAddValueAndLabel(multiEmail, (__bridge CFTypeRef)(person.HomeEmail), kABHomeLabel, NULL);
-        if(![self nullorempty:person.WorkEmail])
-            ABMultiValueAddValueAndLabel(multiEmail, (__bridge CFTypeRef)(person.WorkEmail), kABWorkLabel, NULL);
-        if(![self nullorempty:person.OtherEmail])
-            ABMultiValueAddValueAndLabel(multiEmail, (__bridge CFTypeRef)(person.OtherEmail), kABOtherLabel, NULL);
-        
-        ABRecordSetValue(newRecord, kABPersonEmailProperty, multiEmail, &error);
-        
+        newRecord = [self setRecordForPhone: newRecord  Person:person  Error:error];
         
         ABAddressBookAddRecord(addressBook, newRecord, &error);
         
@@ -141,14 +158,24 @@
 
 - (void) mergeContactsToPhone:contactsToBeUpdatedInPhone{
     
-//    ABAddressBookRef updatedAddressBook = ABAddressBookCreate();
-//    ABRecordRef record = ABAddressBookGetPersonWithRecordID(updatedAddressBook, person.id);
-//
-//    ABRecordSetValue(record, kABPersonFirstNameProperty, person.FirstName,&error);
-//    ABRecordSetValue(record, kABPersonLastNameProperty, person.LastName,&error);
-//    
-//    
-//    ABAddressBookSave(updatedAddressBook, &error);
+    
+    CFErrorRef error = NULL;
+    ABAddressBookRef addressBook = ABAddressBookCreate();
+    
+    for (Person* person in contactsToBeUpdatedInPhone) {
+        
+        ABRecordRef newRecord = ABAddressBookGetPersonWithRecordID(addressBook, person.phonePersonId);
+        
+        newRecord = [self setRecordForPhone: newRecord  Person:person  Error:error];
+        
+        ABAddressBookAddRecord(addressBook, newRecord, &error);
+        
+    }
+    
+    ABAddressBookSave(addressBook, &error);
+    if(error != NULL){
+        NSLog(@"Save Failed");
+    }
     
 }
 
@@ -162,18 +189,19 @@
 - (BOOL) variesInDetailsFirst:(Person*)f Second:(Person*)s {
     bool same=true;
     
-    same = same && f.FirstName         == s.FirstName           ;
-    same = same && f.LastName          == s.LastName            ;
-    same = same && f.MiddleName        == s.MiddleName          ;
-    same = same && f.Organization      == s.Organization        ;
-    same = same && f.JobTitle          == s.JobTitle            ;
-    same = same && f.Department        == s.Department          ;
-    same = same && f.PhoneMain         == s.PhoneMain           ;
-    same = same && f.PhoneMobile       == s.PhoneMobile         ;
-    same = same && f.PhoneIPhone       == s.PhoneIPhone         ;
-    same = same && f.WorkEmail         == s.WorkEmail           ;
-    same = same && f.HomeEmail         == s.HomeEmail           ;
-    same = same && f.OtherEmail        == s.OtherEmail          ;
+    same = same && ([self nullorempty:f.FirstName] || [self nullorempty:s.FirstName] ? [self nullorempty:f.FirstName] && [self nullorempty:s.FirstName] : [f.FirstName isEqualToString:s.FirstName]);
+    same = same && ([self nullorempty:f.LastName    ] || [self nullorempty: s.LastName    ] ? [self nullorempty:f.LastName    ] && [self nullorempty:s.LastName    ] : [f.LastName     isEqualToString:s.LastName    ]);
+    same = same && ([self nullorempty:f.MiddleName  ] || [self nullorempty: s.MiddleName  ] ? [self nullorempty:f.MiddleName  ] && [self nullorempty:s.MiddleName  ] : [f.MiddleName   isEqualToString:s.MiddleName  ]);
+    same = same && ([self nullorempty:f.Organization] || [self nullorempty: s.Organization] ? [self nullorempty:f.Organization] && [self nullorempty:s.Organization] : [f.Organization isEqualToString:s.Organization]);
+    same = same && ([self nullorempty:f.JobTitle    ] || [self nullorempty: s.JobTitle    ] ? [self nullorempty:f.JobTitle    ] && [self nullorempty:s.JobTitle    ] : [f.JobTitle     isEqualToString:s.JobTitle    ]);
+    same = same && ([self nullorempty:f.Department  ] || [self nullorempty: s.Department  ] ? [self nullorempty:f.Department  ] && [self nullorempty:s.Department  ] : [f.Department   isEqualToString:s.Department  ]);
+    same = same && ([self nullorempty:f.PhoneMain   ] || [self nullorempty: s.PhoneMain   ] ? [self nullorempty:f.PhoneMain   ] && [self nullorempty:s.PhoneMain   ] : [f.PhoneMain    isEqualToString:s.PhoneMain   ]);
+    same = same && ([self nullorempty:f.PhoneMobile ] || [self nullorempty: s.PhoneMobile ] ? [self nullorempty:f.PhoneMobile ] && [self nullorempty:s.PhoneMobile ] : [f.PhoneMobile  isEqualToString:s.PhoneMobile ]);
+    same = same && ([self nullorempty:f.PhoneIPhone ] || [self nullorempty: s.PhoneIPhone ] ? [self nullorempty:f.PhoneIPhone ] && [self nullorempty:s.PhoneIPhone ] : [f.PhoneIPhone  isEqualToString:s.PhoneIPhone ]);
+    same = same && ([self nullorempty:f.WorkEmail   ] || [self nullorempty: s.WorkEmail   ] ? [self nullorempty:f.WorkEmail   ] && [self nullorempty:s.WorkEmail   ] : [f.WorkEmail    isEqualToString:s.WorkEmail   ]);
+    same = same && ([self nullorempty:f.HomeEmail   ] || [self nullorempty: s.HomeEmail   ] ? [self nullorempty:f.HomeEmail   ] && [self nullorempty:s.HomeEmail   ] : [f.HomeEmail    isEqualToString:s.HomeEmail   ]);
+    same = same && ([self nullorempty:f.OtherEmail  ] || [self nullorempty: s.OtherEmail  ] ? [self nullorempty:f.OtherEmail  ] && [self nullorempty:s.OtherEmail  ] : [f.OtherEmail   isEqualToString:s.OtherEmail  ]);
+    
     
     return !same;
     
@@ -219,7 +247,7 @@
 
 - (BOOL)isSameFirst:(Person*)first Second:(Person*)second {
     return [ self isCommonValueFoundFirst:first.PhoneNumbers Second:second.PhoneNumbers] ||
-    [ self isCommonValueFoundFirst:first.EMails Second:second.EMails];
+    [ self isCommonValueFoundFirst:first.EMails Second:second.EMails];// || ![self variesInDetailsFirst:first Second:second];
 }
 
 - (BOOL)isCommonValueFoundFirst:(NSMutableArray*)f Second:(NSMutableArray*)s {

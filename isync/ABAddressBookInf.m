@@ -18,6 +18,7 @@
 
         ABRecordRef record = CFArrayGetValueAtIndex(people,i);
         
+        person.phonePersonId =  ABRecordGetRecordID (record);
         person.FirstName = (__bridge NSString *)((ABRecordCopyValue(record, kABPersonFirstNameProperty)));
         person.LastName = (__bridge NSString *)((ABRecordCopyValue(record, kABPersonLastNameProperty)));
         person.MiddleName = (__bridge NSString *)((ABRecordCopyValue(record, kABPersonMiddleNameProperty)));
@@ -64,14 +65,14 @@
                 NSString* emailValue = (__bridge_transfer NSString*) ABMultiValueCopyValueAtIndex(EMails, i);
                 
                 NSLog(@"\n%@\t%@",emailLabel, emailValue);
-                if (emailLabel == @"home") {
+                if ([emailLabel isEqualToString:@"home"]) {
                     person.HomeEmail = emailValue;
                 }
-                if (emailLabel == @"work") {
-                    person.HomeEmail = emailValue;
+                if ([emailLabel isEqualToString:@"work"]) {
+                    person.WorkEmail = emailValue;
                 }
-                if (emailLabel == @"other") {
-                    person.HomeEmail = emailValue;
+                if ([emailLabel isEqualToString:@"other"]) {
+                    person.OtherEmail = emailValue;
                 }
                 [person.EMails addObject:emailValue];
             }

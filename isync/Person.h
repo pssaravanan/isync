@@ -6,8 +6,8 @@
 
 @interface Person : NSObject
 
+@property (atomic) NSInteger phonePersonId ;
 
-@property (nonatomic,strong) NSString* personId;
 
 @property (nonatomic,strong) NSString* FirstName ;
 @property (nonatomic,strong) NSString* LastName ;
@@ -31,3 +31,5 @@
 
 
 @end
+
+
