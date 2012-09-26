@@ -29,7 +29,7 @@
 		84F24B911609DADA00204744 /* ABAddressBookInf.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F24B901609DADA00204744 /* ABAddressBookInf.m */; };
 		84F24B951609F88800204744 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84F24B931609F88800204744 /* AddressBook.framework */; };
 		84F24B961609F88800204744 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84F24B941609F88800204744 /* AddressBookUI.framework */; };
-		84FCD0041610B91D00739854 /* GmailIPhoneSyncer.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FCD0031610B91D00739854 /* GmailIPhoneSyncer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		84FCD0041610B91D00739854 /* GmailIPhoneSyncer.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FCD0031610B91D00739854 /* GmailIPhoneSyncer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */

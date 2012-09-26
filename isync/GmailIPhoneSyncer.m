@@ -223,35 +223,4 @@
     }
     return false;
 }
-
-- (void) populateXmlGoogleContactList:(NSMutableArray*) contactsToBeAddedToGmail {
-    NSMutableArray *family = [[NSMutableArray alloc] init];
-    for (int i = 0; i < contactsToBeAddedToGmail.count; i++) {
-        // simulate person's attributes
-        NSArray *keys = [[NSArray alloc] initWithObjects:
-                         @"id",
-                         @"FirstName",
-                         @"LastName",
-                         @"Nickname",
-                         @"email",
-                         @"phoneNumber",
-                         Nil];
-        
-        NSArray *values = [[NSArray alloc] initWithObjects:
-                           [NSNumber numberWithInt:i],
-                           @"Edward",
-                           [NSNumber numberWithInt:10],
-                           Nil];
-        
-        // create a Person (a dictionary)
-        NSDictionary *person = [[NSDictionary alloc] initWithObjects:values forKeys:keys];
-        [family addObject:person];
-        [person release];
-    }
-    
-    // save the "person" object to the property list
-    [family writeToFile:@"<path>/family.plist" atomically:YES];
-    [family release];
-    
-}
 @end

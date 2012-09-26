@@ -12,7 +12,7 @@
     id <FetcherDelegate> delegate;
 }
 
-@property(nonatomic,weak) id<FetcherDelegate> delegate;
+@property(nonatomic,unsafe_unretained) id<FetcherDelegate> delegate;
 @property(nonatomic,strong) NSString *AuthToken;
 
 -(void)fetchAuthTokenWithGmailId:(NSString *)GmailID GmailPassword:(NSString *)GmailPassword
