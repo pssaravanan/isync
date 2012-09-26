@@ -26,7 +26,7 @@
 -(void) contactsFetched:(NSMutableData*)contactsResponse {
     
     NSMutableArray* IPhoneContactList=[[ABAddressBookInf getPhoneContactList] init];
-    NSMutableArray* GmailContactList= [[ABAddressBookInf getGmailContactsListAfterParsing:contactsResponse]init];
+    NSMutableArray* GmailContactList= [[ABAddressBookInf getGmailContactsListAfterParsing:contactsResponse] init];
     
     NSMutableArray* mergedListOfContacts=[[NSMutableArray alloc] init];
     
@@ -68,16 +68,81 @@
         for (Person *p2 in IPhoneContactList) {
             if ([self isSameFirst:p1 Second:p2]) {
                 if([self variesInDetailsFirst:p1 Second:p2]){
-                    [contactsToBeAddedToGmail addObject:[self mergeContact1:p1 Contact2:p2]];
-                    [contactsToBeAddedToPhone addObject:[self mergeContact1:p1 Contact2:p2]];
+                    [contactsToBeUpdatedInGmail addObject:[self mergeContact1:p1 Contact2:p2]];
+                    [contactsToBeUpdatedInPhone addObject:[self mergeContact1:p1 Contact2:p2]];
                 }
             }
         }
     }
+    
+[self addContactsToPhone:contactsToBeAddedToPhone];
+[self addContactsToGmail:contactsToBeAddedToGmail];
+
+
+[self mergeContactsToPhone:contactsToBeUpdatedInPhone];
+[self mergeContactsToGmail:contactsToBeUpdatedInGmail];
+
+}
+
+- (void) addContactsToPhone:(NSMutableArray*) contactsToBeAddedToPhone{
+    CFErrorRef error = NULL;
+    ABAddressBookRef addressBook = ABAddressBookCreate();
+    
+    for (Person* person in contactsToBeAddedToPhone) {
+        
+        ABRecordRef newRecord = ABPersonCreate();        
+        
+        ABRecordSetValue(newRecord, kABPersonFirstNameProperty,(__bridge CFTypeRef)(person.FirstName) , &error);
+        ABRecordSetValue(newRecord, kABPersonLastNameProperty,(__bridge CFTypeRef)(person.LastName) , &error);
+        ABRecordSetValue(newRecord, kABPersonMiddleNameProperty,(__bridge CFTypeRef)(person.MiddleName) , &error);
+        ABRecordSetValue(newRecord, kABPersonOrganizationProperty,(__bridge CFTypeRef)(person.Organization) , &error);
+        ABRecordSetValue(newRecord, kABPersonJobTitleProperty,(__bridge CFTypeRef)(person.JobTitle) , &error);
+        ABRecordSetValue(newRecord, kABPersonDepartmentProperty,(__bridge CFTypeRef)(person.Department) , &error);
+        
+        //Phone Numbers
+        ABMutableMultiValueRef multiPhone = ABMultiValueCreateMutable(kABMultiStringPropertyType);
+        ABMultiValueAddValueAndLabel(multiPhone, (__bridge CFTypeRef)(person.PhoneMain) , kABPersonPhoneMainLabel, NULL);
+        ABMultiValueAddValueAndLabel(multiPhone, (__bridge CFTypeRef)(person.PhoneMobile) , kABPersonPhoneMobileLabel, NULL);
+        ABMultiValueAddValueAndLabel(multiPhone, (__bridge CFTypeRef)(person.PhoneIPhone), kABPersonPhoneIPhoneLabel, NULL);
+        ABRecordSetValue(newRecord, kABPersonPhoneProperty, multiPhone, &error);
+        
+        
+        //Emails
+        ABMutableMultiValueRef multiEmail = ABMultiValueCreateMutable(kABMultiStringPropertyType);
+        ABMultiValueAddValueAndLabel(multiEmail, (__bridge CFTypeRef)(person.HomeEmail), kABHomeLabel, NULL);
+        ABMultiValueAddValueAndLabel(multiEmail, (__bridge CFTypeRef)(person.WorkEmail), kABWorkLabel, NULL);
+        ABMultiValueAddValueAndLabel(multiEmail, (__bridge CFTypeRef)(person.OtherEmail), kABOtherLabel, NULL);
+        ABRecordSetValue(newRecord, kABPersonEmailProperty, multiEmail, &error);
+        
+        
+        ABAddressBookAddRecord(addressBook, newRecord, &error);
+        
+    }
+    
+    ABAddressBookSave(addressBook, &error);
+    if(error != NULL){
+        NSLog(@"Save Failed");
+    }
+    
+}
+
+- (void) addContactsToGmail:(NSMutableArray*) contactsToBeAddedToGmail{
+    
 }
 
 
--(BOOL) variesInDetailsFirst:(Person*)f Second:(Person*)s {
+- (void) mergeContactsToPhone:contactsToBeUpdatedInPhone{
+    
+}
+
+- (void) mergeContactsToGmail:contactsToBeUpdatedInGmail{
+    
+}
+
+
+
+
+- (BOOL) variesInDetailsFirst:(Person*)f Second:(Person*)s {
     bool same=true;
     
     same = same && f.FirstName         == s.FirstName           ;
@@ -97,11 +162,11 @@
     
 }
 
--(bool) nullorempty:(NSString*)p {
+- (bool) nullorempty:(NSString*)p {
     return p==(id)[NSNull null] || p.length == 0;
 }
 
--(Person*) mergeContact1:(Person*)f Contact2:(Person*)s {
+- (Person*) mergeContact1:(Person*)f Contact2:(Person*)s {
     Person *person = [[Person alloc]init];
     
     if([self nullorempty:f.FirstName])  person.FirstName = s.FirstName;
@@ -138,17 +203,12 @@
 - (BOOL)isSameFirst:(Person*)first Second:(Person*)second {
     return [ self isCommonValueFoundFirst:first.PhoneNumbers Second:second.PhoneNumbers] ||
     [ self isCommonValueFoundFirst:first.EMails Second:second.EMails];
-    
-    
-    /*uncaught exception 'NSInvalidArgumentException', reason: '-[__NSCFType count]: unrecognized selector sent to instance 0x6ccf070'
-     *** First throw call stack:
-     */
 }
 
 - (BOOL)isCommonValueFoundFirst:(NSMutableArray*)f Second:(NSMutableArray*)s {
     
-    int count1 = f.count;
-    int count2 = s.count;
+    int count1 = [f count];
+    int count2 = [s count];
     
     if (count1 > 0 && count2 > 0) {
         for (int i = 0; i < count1; i++) {
