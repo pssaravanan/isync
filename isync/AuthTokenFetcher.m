@@ -45,7 +45,6 @@
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
-    NSLog(@"Received response");
     [self.responseData setLength:0];
 }
 

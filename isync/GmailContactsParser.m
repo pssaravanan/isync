@@ -22,8 +22,7 @@
     GDataXMLDocument *doc = [[GDataXMLDocument alloc] initWithData:xmlData
                                                            options:0 error:&error];
     if (doc == nil) { return nil; }
-    
-    NSLog(@"%@", doc.rootElement);
+
     return nil;
     
 }

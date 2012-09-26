@@ -21,7 +21,6 @@
 
 - (void) authTokenFetched: (NSString *) token {
     
-    NSLog(@"%@\n%@",@"authToken Fetched",token);
     [[[GmailContactsFetcher alloc] init] fetchGmailContactswithAuthToken:token CallbackObj:self];
     
 }
@@ -45,7 +44,6 @@
         for (Person *p2 in IPhoneContactList) {
             if ([self isSameFirst:p1 Second:p2]) {
                 foundInPhone=true;
-                NSLog(@"foundInPhone\t%d",foundInPhone);
                 //foundInPhone = [self isSameFirst:p1 Second:p2];
             }
         }
@@ -59,7 +57,6 @@
         for (Person *p2 in GmailContactList) {
             if ([self isSameFirst:p1 Second:p2]) {
                 foundInGmail=true;
-                NSLog(@"foundInGmail\t%d",foundInGmail);
                 //foundInGmail = [self isSameFirst:p1 Second:p2];
             }
         }
@@ -84,6 +81,16 @@
 
 [self mergeContactsToPhone:contactsToBeUpdatedInPhone];
 [self mergeContactsToGmail:contactsToBeUpdatedInGmail];
+    
+    
+    
+    [[[UIAlertView alloc] initWithTitle:@"Alert!!"
+                                message:@"Contacts Synced"
+                               delegate:self
+                      cancelButtonTitle:@"OK"
+                      otherButtonTitles:nil
+      ]
+     show];
 
 }
 

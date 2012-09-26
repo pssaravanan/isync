@@ -27,13 +27,11 @@
         person.Organization = (__bridge NSString *)((ABRecordCopyValue(record, kABPersonOrganizationProperty)));
         person.JobTitle = (__bridge NSString *)((ABRecordCopyValue(record, kABPersonJobTitleProperty)));
         person.Department = (__bridge NSString *)((ABRecordCopyValue(record, kABPersonDepartmentProperty)));
-//        person.CreationDate = (__bridge NSString *)((ABRecordCopyValue(record, kABPersonCreationDateProperty)));
-//        person.ModificationDate = (__bridge NSString *)((ABRecordCopyValue(record, kABPersonModificationDateProperty)));
+
         
         CFArrayRef PhoneNumbers = (ABRecordCopyValue(record,kABPersonPhoneProperty));
         person.PhoneNumbers=[[NSMutableArray alloc] init];
-        
-        NSLog(@"Phone Numbers");
+
         int phoneNumberCount = ABMultiValueGetCount(PhoneNumbers);
         if (phoneNumberCount > 0) {
             for (CFIndex i = 0; i < phoneNumberCount; i++) {
@@ -41,7 +39,6 @@
                 NSString* phoneLabel =(__bridge NSString*) ABAddressBookCopyLocalizedLabel(
                                                     ABMultiValueCopyLabelAtIndex(PhoneNumbers, i));
                 NSString* phoneValue = (__bridge_transfer NSString*) ABMultiValueCopyValueAtIndex(PhoneNumbers, i);
-                NSLog(@"\n%@\t%@",phoneLabel,phoneValue);
                 
                 if (phoneLabel == @"mobile") {
                     person.PhoneMobile = phoneValue;
@@ -65,8 +62,7 @@
                 NSString* emailLabel = (__bridge NSString*) ABAddressBookCopyLocalizedLabel(
                                                         ABMultiValueCopyLabelAtIndex(EMails, i));
                 NSString* emailValue = (__bridge_transfer NSString*) ABMultiValueCopyValueAtIndex(EMails, i);
-                
-                NSLog(@"\n%@\t%@",emailLabel, emailValue);
+
                 if ([emailLabel isEqualToString:@"home"]) {
                     person.HomeEmail = emailValue;
                 }
@@ -91,9 +87,9 @@
     GDataXMLDocument *doc = [[GDataXMLDocument alloc] initWithData:xmlData
                                                            options:0 error:&xmlError];
     if (doc == nil) { return NULL; }
-    NSLog(@"%@", doc.rootElement);
+
     NSArray *allContacts = [doc.rootElement elementsForName:@"entry"];
-    NSLog(@"%u",allContacts.count);
+
     
     NSMutableArray* gmailContactsList=[[NSMutableArray alloc]init];
     Person *person;

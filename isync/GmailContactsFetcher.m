@@ -17,7 +17,6 @@
 @implementation GmailContactsFetcher
 @synthesize responseData = _responseData;
 -(void)fetchGmailContactswithAuthToken:(NSString *)authToken CallbackObj:(id)callbackObj{
-    NSLog(@"View Loaded");
     self.responseData = [NSMutableData data];
     syncerObject=callbackObj;
     
